@@ -25,12 +25,12 @@ Developers, designers, freelancers, etc.
 - Ban users.
 
 ## Sitemap
-![TemplatesGo Sitemap](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/sitemap/TemplatesGo_Sitemap.png?token=GHSAT0AAAAAABMSBDJGB7QMWYF54MWV5BKEYQGON4A)
+![TemplatesGo Sitemap](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/sitemap/TemplatesGo_Sitemap.png?token=GHSAT0AAAAAABMSBDJGSPIIDVOBGPHWVFDAYQGOVZQ)
 
 ## Wireframes
 
 ##### Account page:
-![TemplatesGo Account](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Account.png?token=GHSAT0AAAAAABMSBDJG2KPRPUBBQRKXXBTOYQGOOMQ)
+![TemplatesGo Account](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Account.png?token=GHSAT0AAAAAABMSBDJGQMQJLPHO7LEHHRTEYQGOWGA)
 
 ##### Cart page:
 ![TemplatesGo Cart](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Cart.png?token=GHSAT0AAAAAABMSBDJG4NFP5FE4ULPHPHKKYQGOPDA)
