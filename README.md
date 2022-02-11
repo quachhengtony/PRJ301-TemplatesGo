@@ -25,39 +25,39 @@ Developers, designers, freelancers, etc.
 - Ban users.
 
 ## Sitemap
-![TemplatesGo Sitemap](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/sitemap/TemplatesGo_Sitemap.png?token=GHSAT0AAAAAABMSBDJGSPIIDVOBGPHWVFDAYQGOVZQ)
+![TemplatesGo Sitemap](/assets/sitemap/TemplatesGo_Sitemap.png)
 
 ## Wireframes
 
 ##### Account page:
-![TemplatesGo Account](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Account.png?token=GHSAT0AAAAAABMSBDJGQMQJLPHO7LEHHRTEYQGOWGA)
+![TemplatesGo Account](/assets/wireframes/TemplatesGo_Account.png)
 
 ##### Cart page:
-![TemplatesGo Cart](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Cart.png?token=GHSAT0AAAAAABMSBDJG4NFP5FE4ULPHPHKKYQGOPDA)
+![TemplatesGo Cart](/assets/wireframes/TemplatesGo_Cart.png)
 
 ##### Checkout page:
-![TemplatesGo Checkout](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Checkout.png?token=GHSAT0AAAAAABMSBDJGLMWAZK22D3A4RQUAYQGOPNA)
+![TemplatesGo Checkout](/assets/wireframes/TemplatesGo_Checkout.png)
 
 ##### Submit template page (seller only):
-![TemplatesGo Submit Template](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_SubmitTemplate.png?token=GHSAT0AAAAAABMSBDJHJOWY4TBDL37MMZK2YQGOPYQ)
+![TemplatesGo Submit Template](/assets/wireframes/TemplatesGo_SubmitTemplate.png)
 
 ##### Home page:
-![TemplatesGo Home](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Home.png?token=GHSAT0AAAAAABMSBDJGTCQ56KUZF6ZUWZQCYQGOQAA)
+![TemplatesGo Home](/assets/wireframes/TemplatesGo_Home.png)
 
 ##### Login page:
-![TemplatesGo Login](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Login.jpg?token=GHSAT0AAAAAABMSBDJG3XJ4LVDFJKOK3PVAYQGOQNA)
+![TemplatesGo Login](/assets/wireframes/TemplatesGo_Login.jpg)
 
 ##### Register page:
-![TemplatesGo Register](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_Register.png?token=GHSAT0AAAAAABMSBDJHYON2UHTM2PIOUQWUYQGOQXQ)
+![TemplatesGo Register](/assets/wireframes/TemplatesGo_Register.png)
 
 ##### Seller dashboard page (seller only):
-![TemplatesGo Seller Dashboard](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_SellerDashboard.jpg?token=GHSAT0AAAAAABMSBDJHJXDFJANLVKRTMINIYQGORBA)
+![TemplatesGo Seller Dashboard](/assets/wireframes/TemplatesGo_SellerDashboard.jpg)
 
 ##### Admin dashboard page (admin only):
-![TemplatesGo Admin Dashboard](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_AdminDashboard.png?token=GHSAT0AAAAAABMSBDJHTDEKKJ3JD36JWD5WYQGORJA)
+![TemplatesGo Admin Dashboard](/assets/wireframes/TemplatesGo_AdminDashboard.png)
 
 ##### Template details page:
-![TemplatesGo Template Details](https://raw.githubusercontent.com/dunghuynh-teaching/prj301-se1615-05/main/assets/wireframes/TemplatesGo_TemplateDetails.jpg?token=GHSAT0AAAAAABMSBDJH6CTIS4L3E3BPZBACYQGORTA)
+![TemplatesGo Template Details](/assets/wireframes/TemplatesGo_TemplateDetails.jpg)
 
 ## License
 MIT
