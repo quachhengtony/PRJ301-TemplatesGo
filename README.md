@@ -1,9 +1,15 @@
-# TemplatesGo
-## _Hassle-free Buying & Selling of High Quality Templates_
+# **TemplatesGo**
+## Hassle-free Buying & Selling of High Quality Templates
 TemplatesGo aims to provides an online marketplace with sleek interface for developers to quickly and easily buy and sell their website templates, connecting developers who is looking for a platform to sell their website templates online and developers who are looking to buy high quality templates for their projects or works.
 
+## Team
+- Quách Hêng Tô Ni (SE160076)
+- Phạm Trọng Thành (SE160037)
+- Huỳnh Minh Trung (SE151480)
+- Phan Nhật Hoàng (SE150781)
+
 ## Users
-Developers, designers, freelancers, etc.
+Developers, designers, freelancers, and others in technology-related fields.
 
 ## Features
 - Create accounts.
@@ -29,8 +35,11 @@ Developers, designers, freelancers, etc.
 
 ## Wireframes
 
-##### Account page:
-![TemplatesGo Account](/assets/wireframes/TemplatesGo_Account.png)
+##### Home page:
+![TemplatesGo Home](/assets/wireframes/TemplatesGo_Home.png)
+
+##### Template details page:
+![TemplatesGo Template Details](/assets/wireframes/TemplatesGo_TemplateDetails.jpg)
 
 ##### Cart page:
 ![TemplatesGo Cart](/assets/wireframes/TemplatesGo_Cart.png)
@@ -38,26 +47,26 @@ Developers, designers, freelancers, etc.
 ##### Checkout page:
 ![TemplatesGo Checkout](/assets/wireframes/TemplatesGo_Checkout.png)
 
+##### Seller dashboard page (seller only):
+![TemplatesGo Seller Dashboard](/assets/wireframes/TemplatesGo_SellerDashboard.jpg)
+
 ##### Submit template page (seller only):
 ![TemplatesGo Submit Template](/assets/wireframes/TemplatesGo_SubmitTemplate.png)
 
-##### Home page:
-![TemplatesGo Home](/assets/wireframes/TemplatesGo_Home.png)
+##### Account list page (admin only):
+![TemplatesGo Admin Dashboard](/assets/wireframes/TemplatesGo_AccountList.jpg)
+
+##### Review report page (admin only):
+![TemplatesGo Admin Dashboard](/assets/wireframes/TemplatesGo_ReviewReport.jpg)
+
+##### Account page:
+![TemplatesGo Account](/assets/wireframes/TemplatesGo_Account.png)
 
 ##### Login page:
 ![TemplatesGo Login](/assets/wireframes/TemplatesGo_Login.jpg)
 
 ##### Register page:
 ![TemplatesGo Register](/assets/wireframes/TemplatesGo_Register.png)
-
-##### Seller dashboard page (seller only):
-![TemplatesGo Seller Dashboard](/assets/wireframes/TemplatesGo_SellerDashboard.jpg)
-
-##### Admin dashboard page (admin only):
-![TemplatesGo Admin Dashboard](/assets/wireframes/TemplatesGo_AdminDashboard.png)
-
-##### Template details page:
-![TemplatesGo Template Details](/assets/wireframes/TemplatesGo_TemplateDetails.jpg)
 
 ## License
 MIT
