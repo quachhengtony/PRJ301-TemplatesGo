@@ -83,7 +83,7 @@ The Entity Relationship Diagram bellow shows how Admin entity will interact with
 
 ##### Physical design
 The database diagram bellow shows how the system's logical design is implemented in a database. Buyer, Seller, and Admin entity only exists in the logical design to better represent how the system works, and these entities is grouped into one singular entity (Account entity) in the physical design.
-![TemplatesGo Physical Design](/assets/database/TemplatesGo_PhysicalDesign.jpg)
+![TemplatesGo Physical Design](/assets/database-designs/TemplatesGo_PhysicalDesign.jpg)
 
 ## System Design
 - Naming convention: camel case.
