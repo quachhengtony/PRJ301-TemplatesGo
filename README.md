@@ -68,5 +68,37 @@ Developers, designers, freelancers, and others in technology-related fields.
 ##### Register page:
 ![TemplatesGo Register](/assets/wireframes/TemplatesGo_Register.png)
 
+## Database Design
+
+##### Logical design
+![TemplatesGo Logical Design Same Entities](/assets/database-designs/TemplatesGo_LogicalDesignSameEntities.png)
+
+##### Logical design (with Buyer and Seller entities represented seperately from Account entity)
+The Entity Relationship Diagram bellow shows how the entities will interact with eachothers.
+![TemplatesGo Logical Design Without Admin](/assets/database-designs/TemplatesGo_LogicalDesignWithoutAdmin.jpg)
+
+##### Logical design (with Buyer, Seller, and Admin entities represented seperately from Account entity)
+The Entity Relationship Diagram bellow shows how Admin entity will interact with the rest of the system.
+![TemplatesGo Logical Design With Admin](/assets/database-designs/TemplatesGo_LogicalDesignWithAdmin.jpg)
+
+##### Physical design
+The database diagram bellow shows how the system's logical design is implemented in a database. Buyer, Seller, and Admin entity only exists in the logical design to better represent how the system works, and these entities is grouped into one singular entity (Account entity) in the physical design.
+![TemplatesGo Physical Design](/assets/database/TemplatesGo_PhysicalDesign.jpg)
+
+## System Design
+- Naming convention: camel case.
+- File naming convention: camel case.
+- Indentation: indent once per nesting level using tab.
+- PLacement of braces: Allman (BSD/Pascal).
+
+##### Folder structures:
+Controllers:
+![TemplatesGo Controller](/assets/screenshots/TemplatesGo_Controllers.png)
+Models:
+![TemplatesGo Models](/assets/screenshots/TemplatesGo_Models.png)
+Views:
+![TemplatesGo Views](/assets/screenshots/TemplatesGo_Views.png)
+
+
 ## License
 MIT
