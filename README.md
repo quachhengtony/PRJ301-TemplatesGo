@@ -71,15 +71,15 @@ Developers, designers, freelancers, and others in technology-related fields.
 ## Database Design
 
 ##### Logical design
-![TemplatesGo Logical Design Same Entities](/assets/database/TemplatesGo_LogicalDesignSameEntities.png)
+![TemplatesGo Logical Design Same Entities](/assets/database-designs/TemplatesGo_LogicalDesignSameEntities.png)
 
 ##### Logical design (with Buyer and Seller entities represented seperately from Account entity)
 The Entity Relationship Diagram bellow shows how the entities will interact with eachothers.
-![TemplatesGo Logical Design Without Admin](/assets/database/TemplatesGo_LogicalDesignWithoutAdmin.jpg)
+![TemplatesGo Logical Design Without Admin](/assets/database-designs/TemplatesGo_LogicalDesignWithoutAdmin.jpg)
 
 ##### Logical design (with Buyer, Seller, and Admin entities represented seperately from Account entity)
 The Entity Relationship Diagram bellow shows how Admin entity will interact with the rest of the system.
-![TemplatesGo Logical Design With Admin](/assets/database/TemplatesGo_LogicalDesignWithAdmin.jpg)
+![TemplatesGo Logical Design With Admin](/assets/database-designs/TemplatesGo_LogicalDesignWithAdmin.jpg)
 
 ##### Physical design
 The database diagram bellow shows how the system's logical design is implemented in a database. Buyer, Seller, and Admin entity only exists in the logical design to better represent how the system works, and these entities is grouped into one singular entity (Account entity) in the physical design.
