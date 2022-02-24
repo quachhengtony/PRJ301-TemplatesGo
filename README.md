@@ -87,7 +87,7 @@ The database diagram bellow shows how the system's logical design is implemented
 
 ## System Design
 - Naming convention: camel case.
-- File naming convention: camel case.
+- File naming convention: camel case for jsp files and pascal case for java files.
 - Indentation: indent once per nesting level using tab.
 - PLacement of braces: Allman (BSD/Pascal).
 
