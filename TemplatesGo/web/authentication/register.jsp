@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login
-    Created on : Mar 2, 2022, 8:27:13 PM
-    Author     : Tony Quach
+    Document   : register
+    Created on : Mar 2, 2022, 8:54:32 PM
+    Author     : Tony
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -60,7 +60,7 @@
             <div class="container toparea">
                 <div class="underlined-title">
                     <div class="editContent">
-                        <h1 class="text-center latestitems">Login</h1>
+                        <h1 class="text-center latestitems">Register</h1>
                     </div>
                     <div class="wow-hr type_short">
                         <span class="wow-hr-h">
@@ -80,14 +80,23 @@
                         </div>
                         <form method="post" action="contact.php" id="contactform">
                             <div class="form">
+                                <input type="text" name="username" placeholder="Your Username *" required>
+                                <input type="text" name="firstName" placeholder="Your First Name *" required>
+                                <input type="text" name="lastName" placeholder="Your Last Name *" required>
                                 <input type="text" name="email" placeholder="Your E-mail Address *" required>
                                 <input type="password" name="password" placeholder="Your Password *" minlength="8" required>
-                                <input type="submit" id="submit" class="clearfix btn" value="Login">
+                                <input type="password" name="confirmPassword" placeholder="Confirm Password *" minlength="8" required>
+                                <label for="role">Register as a:</label>
+                                <select name="role" id="role">
+                                    <option value="buyer">Buyer</option>
+                                    <option value="seller">Seller</option>
+                                </select>
+                                <input type="submit" id="submit" class="clearfix btn" value="Register">
                             </div>
                         </form>
                         <div>
                             <div class="alert alert-success">
-                                Don't have an account? <a href=""#">Register</a>
+                                Already have an account? <a href=""#">Login</a>
                             </div>
                         </div>
                     </div>

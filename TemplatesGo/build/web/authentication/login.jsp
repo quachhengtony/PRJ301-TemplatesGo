@@ -85,6 +85,11 @@
                                 <input type="submit" id="submit" class="clearfix btn" value="Login">
                             </div>
                         </form>
+                        <div>
+                            <div class="alert alert-success">
+                                Don't have an account? <a href=""#">Register</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

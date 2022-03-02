@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -99,7 +99,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"container toparea\">\n");
       out.write("                <div class=\"underlined-title\">\n");
       out.write("                    <div class=\"editContent\">\n");
-      out.write("                        <h1 class=\"text-center latestitems\">Login</h1>\n");
+      out.write("                        <h1 class=\"text-center latestitems\">Register</h1>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"wow-hr type_short\">\n");
       out.write("                        <span class=\"wow-hr-h\">\n");
@@ -119,14 +119,23 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        </div>\n");
       out.write("                        <form method=\"post\" action=\"contact.php\" id=\"contactform\">\n");
       out.write("                            <div class=\"form\">\n");
+      out.write("                                <input type=\"text\" name=\"username\" placeholder=\"Your Username *\" required>\n");
+      out.write("                                <input type=\"text\" name=\"firstName\" placeholder=\"Your First Name *\" required>\n");
+      out.write("                                <input type=\"text\" name=\"lastName\" placeholder=\"Your Last Name *\" required>\n");
       out.write("                                <input type=\"text\" name=\"email\" placeholder=\"Your E-mail Address *\" required>\n");
       out.write("                                <input type=\"password\" name=\"password\" placeholder=\"Your Password *\" minlength=\"8\" required>\n");
-      out.write("                                <input type=\"submit\" id=\"submit\" class=\"clearfix btn\" value=\"Login\">\n");
+      out.write("                                <input type=\"password\" name=\"confirmPassword\" placeholder=\"Confirm Password *\" minlength=\"8\" required>\n");
+      out.write("                                <label for=\"role\">Register as a:</label>\n");
+      out.write("                                <select name=\"role\" id=\"role\">\n");
+      out.write("                                    <option value=\"buyer\">Buyer</option>\n");
+      out.write("                                    <option value=\"seller\">Seller</option>\n");
+      out.write("                                </select>\n");
+      out.write("                                <input type=\"submit\" id=\"submit\" class=\"clearfix btn\" value=\"Register\">\n");
       out.write("                            </div>\n");
       out.write("                        </form>\n");
       out.write("                        <div>\n");
       out.write("                            <div class=\"alert alert-success\">\n");
-      out.write("                                Don't have an account? <a href=\"\"#\">Register</a>\n");
+      out.write("                                Already have an account? <a href=\"\"#\">Login</a>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
@@ -173,7 +182,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <script src=\"js/anim.js\"></script>\n");
       out.write("    <script src=\"js/validate.js\"></script>\n");
       out.write("</body>\n");
-      out.write("</html>\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
