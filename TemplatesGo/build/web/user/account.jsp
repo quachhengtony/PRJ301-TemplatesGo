@@ -1,6 +1,6 @@
 <%-- 
-    Document   : register
-    Created on : Mar 2, 2022, 8:54:32 PM
+    Document   : account
+    Created on : Mar 2, 2022, 9:22:18 PM
     Author     : Tony Quach
 --%>
 
@@ -47,7 +47,7 @@
                         <div class="col-md-12 text-center">
                             <div class="text-pageheader">
                                 <div class="subtext-image" data-scrollreveal="enter bottom over 1.7s after 0.0s">
-                                    Join Our Awesome Marketplace
+                                    Account
                                 </div>
                             </div>
                         </div>
@@ -58,18 +58,6 @@
         <!-- CONTENT =============================-->
         <section class="item content">
             <div class="container toparea">
-                <div class="underlined-title">
-                    <div class="editContent">
-                        <h1 class="text-center latestitems">Register</h1>
-                    </div>
-                    <div class="wow-hr type_short">
-                        <span class="wow-hr-h">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </span>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="done">
@@ -78,27 +66,27 @@
                                 Your message has been sent. Thank you!
                             </div>
                         </div>
+                        <div class="alert">
+                            <div class="slide-text">
+                                <img src="http://wowthemes.net/demo/salique/salique-boxed/images/temp/avatar2.png" alt="Avatar" onclick="handleTriggerAvatarUpload()">
+                            </div>
+                        </div>
                         <form method="post" action="contact.php" id="contactform">
                             <div class="form">
+                                <input type="file" id="avatarImage" name="avatarImage" accept="image/*" style="display:none">
                                 <input type="text" name="username" placeholder="Your Username *" required>
                                 <input type="text" name="firstName" placeholder="Your First Name *" required>
                                 <input type="text" name="lastName" placeholder="Your Last Name *" required>
                                 <input type="text" name="email" placeholder="Your E-mail Address *" required>
                                 <input type="password" name="password" placeholder="Your Password *" minlength="8" required>
-                                <input type="password" name="confirmPassword" placeholder="Confirm Password *" minlength="8" required>
                                 <label for="role">Register as a:</label>
                                 <select name="role" id="role">
                                     <option value="buyer">Buyer</option>
                                     <option value="seller">Seller</option>
                                 </select>
-                                <input type="submit" id="submit" class="clearfix btn" value="Register">
+                                <input type="submit" id="submit" class="clearfix btn" value="Update">
                             </div>
                         </form>
-                        <div>
-                            <div class="alert alert-success">
-                                Already have an account? <a href=""#">Login</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -138,6 +126,12 @@
         </div>
     </div>
     <!-- SCRIPTS =============================-->
+    <script type="text/javascript">
+        function handleTriggerAvatarUpload() {
+            document.getElementById("avatarImage").click();
+        }
+    </script>
+    <script src="js/avatarImageUpload.js"></script>
     <script src="js/jquery-.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/anim.js"></script>

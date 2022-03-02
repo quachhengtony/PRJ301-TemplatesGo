@@ -1,7 +1,7 @@
 <%-- 
     Document   : register
     Created on : Mar 2, 2022, 8:54:32 PM
-    Author     : Tony
+    Author     : Tony Quach
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
