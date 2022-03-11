@@ -11,9 +11,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="generator" content="">
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link href="../css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
     </head>
@@ -22,26 +22,7 @@
         <!-- HEADER =============================-->
         <header class="item header margin-top-0">
             <div class="wrapper">
-                <nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
-                                <i class="fa fa-bars"></i>
-                                <span class="sr-only">Toggle navigation</span>
-                            </button>
-                            <a href="index.jsp" class="navbar-brand brand"> templatesgo </a>
-                        </div>
-                        <div id="navbar-collapse-02" class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="propClone"><a href="index.jsp">Home</a></li>
-                                <li class="propClone"><a href="shop.jsp">Shop</a></li>
-                                <li class="propClone"><a href="product.jsp">Product</a></li>
-                                <li class="propClone"><a href="checkout.jsp">Checkout</a></li>
-                                <li class="propClone"><a href="contact.jsp">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <%@include file="../layout/navBar.jsp" %>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -70,17 +51,17 @@
                             <i class="fa fa-star"></i>
                         </span>
                     </div>
-                    <div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
-</div>
- <button type="button"  style="background-color:antiquewhite; border-color:blue; color:black" > SORT !</button>
-                </div>
 
+                </div>
+                <div >
+                    <div style="margin-bottom: 10px">
+                        <input type="text" style="width: 50%; margin-left: 23%;"  class="searchTerm" placeholder="What are you looking for?">
+                        <button type="submit" style="width: 4%" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="button"  style="background-color:antiquewhite; border-color:blue; color:black" > SORT !</button>
                 <div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
                     <form id="edd_checkout_cart_form" method="post">
                         <div id="edd_checkout_cart_wrap">
@@ -103,7 +84,7 @@
                                     <tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
                                         <td class="edd_cart_item_name">
                                             <div class="edd_cart_item_image">
-                                                <img width="25" height="25" src="images/scorilo2-70x70.jpg" alt="">
+                                                <img width="100" height="100" src="${pageContext.request.contextPath}/images/scorilo2-70x70.jpg" alt="">
                                             </div>
                                             <span class="edd_checkout_cart_item_title">Name: </span>
                                             <span class="edd_checkout_cart_item_title">Category :  </span>
@@ -130,48 +111,14 @@
 
                 </div>
             </div>
-        </section>
+        </section>    
 
-        <!-- CALL TO ACTION =============================-->
-        <section class="content-block" style="background-color:#00bba7;">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
-                        <div class="item" data-scrollreveal="enter top over 0.4s after 0.1s">
-                            <h1 class="callactiontitle"> Promote Items Area Give Discount to Buyers <span class="callactionbutton"><i class="fa fa-gift"></i> WOW24TH</span>
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER =============================-->
-        <div class="footer text-center">
-            <div class="container">
-                <div class="row">
-                    <p class="footernote">
-                        Connect with Scorilo
-                    </p>
-                    <ul class="social-iconsfooter">
-                        <li><a href="#"><i class="fa fa-phone"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                    </ul>
-                    <p>
-                        &copy; 2017 Your Website Name<br/>
-                        Scorilo - Free template by <a href="https://www.wowthemes.net/">WowThemesNet</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        <%@include file="../layout/footer.jsp" %>
 
         <!-- SCRIPTS =============================-->
-        <script src="../js/jquery-.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/anim.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery-.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/anim.js"></script>
 
     </body>
 </html>

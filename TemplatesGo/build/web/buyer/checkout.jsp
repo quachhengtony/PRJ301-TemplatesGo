@@ -23,35 +23,8 @@
 <!-- HEADER =============================-->
 <header class="item header margin-top-0">
 <div class="wrapper">
-	<nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
-			<i class="fa fa-bars"></i>
-			<span class="sr-only">Toggle navigation</span>
-			</button>
-			<a href="../general/home.jsp" class="navbar-brand brand"> TEMPLATESGO </a>
-		</div>
-		<div id="navbar-collapse-02" class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="propClone"><a href="../general/home.jsp">Home</a></li>
-				<li class="propClone"><a href="../seller/postTemplate.jsp">Submit Template</a></li>
-				<li class="propClone"><a href="cart.jsp">Cart</a></li>
-				<li class="propClone"><a href="checkout.jsp">Checkout</a></li>
-                                <li class="propClone dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <img style="width: 18px;" class="img-circle img-responsive" src="../images/avatar.png" alt=""/>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Profile</a></li>
-                                        <li><a href="#">Log out</a></li>
-                                    </ul>
-                                </li>
-                                
-			</ul>
-		</div>
-	</div>
-	</nav>
+	<%@include file="../layout/navBar.jsp" %>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
@@ -185,27 +158,8 @@
 </section>
 
 
-<!-- FOOTER =============================-->
-<div class="footer text-center">
-	<div class="container">
-		<div class="row">
-			<p class="footernote">
-				 Connect with Scorilo
-			</p>
-			<ul class="social-iconsfooter">
-				<li><a href="#"><i class="fa fa-phone"></i></a></li>
-				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-				<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-			</ul>
-			<p>
-				 &copy; 2017 Your Website Name<br/>
-				Scorilo - Free template by <a href="https://www.wowthemes.net/">WowThemesNet</a>
-			</p>
-		</div>
-	</div>
-</div>
+                <%@include file="../layout/footer.jsp" %>
+
 
 <!-- SCRIPTS =============================-->
 <script src="../js/jquery-.js"></script>
