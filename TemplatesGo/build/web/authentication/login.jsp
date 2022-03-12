@@ -16,32 +16,15 @@
         <link href="../css/style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
+        <title>Login Page</title>
     </head>
     <body>
 
         <!-- HEADER =============================-->
         <header class="item header margin-top-0">
             <div class="wrapper">
-                <nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
-                                <i class="fa fa-bars"></i>
-                                <span class="sr-only">Toggle navigation</span>
-                            </button>
-                            <a href="index.jsp" class="navbar-brand brand"> TemplatesGo </a>
-                        </div>
-                        <div id="navbar-collapse-02" class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="propClone"><a href="index.jsp">Home</a></li>
-                                <li class="propClone"><a href="shop.jsp">Shop</a></li>
-                                <li class="propClone"><a href="product.jsp">Product</a></li>
-                                <li class="propClone"><a href="checkout.jsp">Checkout</a></li>
-                                <li class="propClone"><a href="contact.jsp">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <%@include file="../layout/navBar.jsp" %>
+
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -87,7 +70,7 @@
                         </form>
                         <div>
                             <div class="alert alert-success">
-                                Don't have an account? <a href=""#">Register</a>
+                                Don't have an account? <a href="${pageContext.request.contextPath}/authentication/register.jsp">Register</a>
                             </div>
                         </div>
                     </div>
@@ -95,39 +78,9 @@
             </div>
         </div>
     </section>
-    <!-- CALL TO ACTION =============================-->
-    <section class="content-block" style="background-color:#00bba7;">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1">
-                    <div class="item" data-scrollreveal="enter top over 0.4s after 0.1s">
-                        <h1 class="callactiontitle"> Promote Items Area Give Discount to Buyers <span class="callactionbutton"><i class="fa fa-gift"></i> WOW24TH</span>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- FOOTER =============================-->
-    <div class="footer text-center">
-        <div class="container">
-            <div class="row">
-                <p class="footernote">
-                    Connect with TemplatesGo
-                </p>
-                <ul class="social-iconsfooter">
-                    <li><a href="#"><i class="fa fa-phone"></i></a></li>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                </ul>
-                <p>
-                    &copy; 2022 TemplatesGo<br/>
-                </p>
-            </div>
-        </div>
-    </div>
+
+    <%@include file="../layout/footer.jsp" %>
+
     <!-- SCRIPTS =============================-->
     <script src="js/jquery-.js"></script>
     <script src="js/bootstrap.min.js"></script>
