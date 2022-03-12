@@ -1,6 +1,6 @@
 <%-- 
-    Document   : product
-    Created on : Mar 1, 2022, 2:44:22 PM
+    Document   : templateDetail
+    Created on : Feb 22, 2022, 8:55:30 PM
     Author     : Thanh
 --%>
 
