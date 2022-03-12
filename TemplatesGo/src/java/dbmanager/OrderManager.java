@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import models.Order;
-import utils.DBUtil;
+import utils.DBUtils;
 
 /**
  *
@@ -21,7 +21,7 @@ import utils.DBUtil;
 public class OrderManager {
     public boolean insertOrder(int templateId,int sellerId, int buyerId,Date date){
         try{
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO OrderHistory (templateId, sellerId, buyerId, date) values(?,?,?,?)");
             ps.setInt(1, templateId);
             ps.setInt(2, sellerId);
@@ -37,7 +37,7 @@ public class OrderManager {
     public List<Order> listOrderBySeller(int sellerId){
         List<Order> orders = new ArrayList<>();
         try{
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select templateId, sellerId, buyerId, date from OrderHistory where sellerId = ?");
             ps.setInt(1, sellerId);
             ResultSet rs = ps.executeQuery();
@@ -54,7 +54,7 @@ public class OrderManager {
     public List<Order> listOrderByBuyer(int buyerId){
         List<Order> orders = new ArrayList<>();
         try{
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select templateId, sellerId, buyerId, date from OrderHistory where buyerId = ?");
             ps.setInt(1, buyerId);
             ResultSet rs = ps.executeQuery();

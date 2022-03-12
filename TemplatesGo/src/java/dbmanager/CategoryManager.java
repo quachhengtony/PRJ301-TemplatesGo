@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import models.Category;
-import utils.DBUtil;
+import utils.DBUtils;
 
 /**
  *
@@ -20,7 +20,7 @@ import utils.DBUtil;
 public class CategoryManager {
     public boolean insertCategory(Category cate){
         try{
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO dbo.\"Category\" VALUES ( ? )");
             ps.setString(1, cate.getCategory());
             ps.executeQuery();
@@ -33,7 +33,7 @@ public class CategoryManager {
     public int getSize(){
         Category cate = new Category();
         try{
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select * from Category");
             int count = 0;
             ResultSet rs = ps.executeQuery();
@@ -50,7 +50,7 @@ public class CategoryManager {
     public List<Category> getCategoryList(){
         List<Category> cates = new ArrayList<>();
         try{
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select * from Category");
             
             ResultSet rs = ps.executeQuery();
@@ -68,7 +68,7 @@ public class CategoryManager {
         Category gcate = null;
         Category category = new Category();
         try {
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select * from Category where id = ? ");
             ps.setInt(1, cateId);
             ResultSet rs = ps.executeQuery();
@@ -85,7 +85,7 @@ public class CategoryManager {
     
     public boolean updateCategory(Category newCate){
         try {
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Update Category Set category = ? where id = ?");
             ps.setString(1, newCate.getCategory());
             ps.setInt(2, newCate.getId());
@@ -98,7 +98,7 @@ public class CategoryManager {
     
     public boolean deleteCategory(int cateId){
         try {
-            Connection con = DBUtil.getConnection();
+            Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Delete from Category where id = ?");
             ps.setInt(1, cateId);
             ps.execute();

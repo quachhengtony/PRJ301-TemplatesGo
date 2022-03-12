@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import models.Cart;
-import utils.DBUtil;
+import utils.DBUtils;
 
 /**
  *
@@ -27,7 +27,7 @@ public class CartManager {
         try {
             String sql = "insert into CartItem (buyerId, templateId)\n" +
                             "values (?, ?)";
-            conn = DBUtil.getConnection();
+            conn = DBUtils.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, buyerId);
             pstm.setInt(2, templateId);
@@ -44,7 +44,7 @@ public class CartManager {
         try {
             String sql = "select templateId from CartItem\n" +
                             "where buyerId = ? and templateId = ?";
-            conn = DBUtil.getConnection();
+            conn = DBUtils.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, buyerId);
             pstm.setInt(2, templateId);
@@ -61,7 +61,7 @@ public class CartManager {
         try {
             String sql = "select templateId from CartItem\n" +
                             "where buyerId = ?";
-            conn = DBUtil.getConnection();
+            conn = DBUtils.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, buyerId);
             rs = pstm.executeQuery();
@@ -80,7 +80,7 @@ public class CartManager {
         try {
             String sql = "delete from CartItem\n"
                     + "where buyerId = ? and templateId = ?";
-            conn = DBUtil.getConnection();
+            conn = DBUtils.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, buyerId);
             pstm.setInt(2, templateId);
@@ -97,7 +97,7 @@ public class CartManager {
         try {
             String sql = "delete from CartItem\n"
                     + "where buyerId = ?";
-            conn = DBUtil.getConnection();
+            conn = DBUtils.getConnection();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, buyerId);
             int affectedRow = pstm.executeUpdate();
