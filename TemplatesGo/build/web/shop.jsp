@@ -4,6 +4,7 @@
     Author     : Thanh
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -232,7 +233,9 @@
 		<!-- /.productbox -->
 	</div>
 </div>
-</div>
+    <c:forEach begin="1" end="${endP}" var="i">
+        <a href="Cart?index=${i}">${i}</a>
+    </c:forEach>
 </section>
 
 <!-- CALL TO ACTION =============================-->
