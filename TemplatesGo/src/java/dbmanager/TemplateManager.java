@@ -20,7 +20,7 @@ import utils.DBUtils;
 public class TemplateManager {
 
     public boolean postTemplate(Template template) {
-        String sql = "INSERT INTO Template (sellerId, categoryId, name, description, price, hostUrl, sourceCodePath, createdDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Template (sellerId, categoryId, name, description, price, hostUrl, sourceCodePath, createdDate, lastModifiedDate, soldQuantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             Connection connection = DBUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql, new String[]{"id"});
@@ -31,7 +31,28 @@ public class TemplateManager {
             preparedStatement.setFloat(5, template.getPrice());
             preparedStatement.setString(6, template.getHostUrl());
             preparedStatement.setString(7, template.getSourceCodePath());
-            preparedStatement.setString(8, template.getCreatedDate());
+            preparedStatement.setDate(8, template.getCreatedDate());
+            preparedStatement.setDate(9, template.getLastModifiedDate());
+            preparedStatement.setInt(10, template.getSoldQuantity());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            int id = 0;
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public boolean incrementTemplateSoldQuantity(int templateId) {
+        String sql = "UPDATE Template SET soldQuantity = soldQuantity + 1 WHERE id = ?";
+        try {
+            Connection connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, new String[]{"id"});
+            preparedStatement.setInt(1, templateId);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             int id = 0;
@@ -54,7 +75,7 @@ public class TemplateManager {
             preparedStatement.setInt(1, templateId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                template = new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity")));
+                template = new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity")));
             }
             return template;
         } catch (Exception e) {
@@ -74,7 +95,7 @@ public class TemplateManager {
             preparedStatement.setFloat(4, template.getPrice());
             preparedStatement.setString(5, template.getHostUrl());
             preparedStatement.setString(6, template.getSourceCodePath());
-            preparedStatement.setString(7, template.getLastModifiedDate());
+            preparedStatement.setDate(7, template.getLastModifiedDate());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             int id = 0;
@@ -117,7 +138,7 @@ public class TemplateManager {
             preparedStatement.setInt(2, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -137,7 +158,7 @@ public class TemplateManager {
             preparedStatement.setInt(3, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -157,7 +178,7 @@ public class TemplateManager {
             preparedStatement.setInt(3, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -177,7 +198,7 @@ public class TemplateManager {
             preparedStatement.setInt(3, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -197,7 +218,7 @@ public class TemplateManager {
             preparedStatement.setInt(3, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -216,7 +237,7 @@ public class TemplateManager {
             preparedStatement.setInt(2, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -235,7 +256,7 @@ public class TemplateManager {
             preparedStatement.setInt(2, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
@@ -254,7 +275,7 @@ public class TemplateManager {
             preparedStatement.setInt(2, limit);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
             }
             return templates;
         } catch (Exception e) {
