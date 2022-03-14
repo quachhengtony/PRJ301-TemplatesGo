@@ -3,7 +3,7 @@
     Created on : Feb 22, 2022, 8:52:52 PM
     Author     : Thanh
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,61 +54,55 @@
 		</div>
 	</div>
 	<div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
-		<form id="edd_checkout_cart_form" method="post">
-			<div id="edd_checkout_cart_wrap">
-				
-			</div>
-		</form>
 		<div id="edd_checkout_form_wrap" class="edd_clearfix">
-			<form id="edd_purchase_form" class="edd_form" action="#" method="POST">
-				<fieldset id="edd_checkout_user_info">
+			<form action="${pageContext.request.contextPath}/Seller/add" method="POST" enctype="multipart/form-data">
+				<fieldset>
 					<legend>Template Info</legend>
-					<p id="edd-email-wrap">
-						<label class="edd-label" for="edd-email">
+					<p >
+						<label >
 						Name <span class="edd-required-indicator">*</span></label>
-						<input class="edd-input required" type="email" name="edd_email" placeholder="Email address" id="edd-email" value="">
+                                                <input class="edd-input" type="text" name="name" placeholder="Template's name" value="" required="">
 					</p>
-					<p id="edd-first-name-wrap">
-						<label class="edd-label" for="edd-first">
-						Category : <span class="edd-required-indicator">*</span>
-						</label>
-                                            <select name="Category">
-                                                                    <option name="ol">Danh sách 01</option>
-                                                                    <option>Danh sách 02</option>
-                                                                    <option>Danh sách 03</option>
-                                                                    <option>Danh sách 03</option>
-                                                                        </select>
-						
+                                        <p>
+                                            <label>
+                                                Category <span class="edd-required-indicator">*</span>
+                                            </label>
+                                            <select name="categoryId" required="">
+                                                <c:forEach var="cate" items="${requestScope.cateList}">
+                                                    <option value="${cate.id}">${cate.category}</option>
+                                                </c:forEach>
+                                            </select>
+
+                                        </p>
+					<p>
+						<label>
+						Description <span class="edd-required-indicator">*</span></label>
+                                                <input class="edd-input" type="text" name="description" placeholder="Template's description" value="" required="">
 					</p>
-					<p id="edd-last-name-wrap">
-						<label class="edd-label" for="edd-last">
-						Description :</label>
-						<input class="edd-input" type="text" name="edd_last" id="edd-last" placeholder="Last name" value="">
+                                        <p>
+						<label>
+						Live Demo <span class="edd-required-indicator">*</span></label>
+                                                <input class="edd-input" type="text" name="hostURL" placeholder="Host URL" value="" required="">
 					</p>
-                                        <p id="edd-last-name-wrap">
-						<label class="edd-label" for="edd-last">
-						Host-URL :</label>
-						<input class="edd-input" type="text" name="edd_last" id="edd-last" placeholder="Last name" value="">
+                                        <p>
+						<label>
+						Images <span class="edd-required-indicator">*</span></label>
+                                                <input type="file" name="images" accept="image/*" multiple="" required="">
 					</p>
-                                        <p id="edd-last-name-wrap">
-						<label class="edd-label" for="edd-last">
-						Images:</label>
-						<input type="file" id="myFile" name="Images:">
+                                        <p>
+						<label>
+						Price <span class="edd-required-indicator">*</span></label>
+                                                <input class="edd-input" type="number" name="price" placeholder="Price" value="" required="">
 					</p>
-                                        <p id="edd-last-name-wrap">
-						<label class="edd-label" for="edd-last">
-						Price : </label>
-						<input class="edd-input" type="text" name="edd_last" id="edd-last" placeholder="Last name" value="">
+                                        <p>
+						<label>
+						Source Code <span class="edd-required-indicator">*</span> (.zip file only)</label>
+                                                <input type="file" name="sourceCode" accept=".zip" required="">
 					</p>
-                                        <p id="edd-last-name-wrap">
-						<label class="edd-label" for="edd-last">
-						Source Code : </label>
-						<input type="file" id="myFile" name="Source Code ">
-					</p>
+                                        <input type="hidden" name="sellerId" value="4">
 				</fieldset>
 				<fieldset id="edd_purchase_submit">
-					
-					<input type="submit" class="edd-submit button" id="edd-purchase-button" name="edd-purchase" value="SUBMIT">
+                                    <input type="submit" class="edd-submit button" value="SUBMIT">
 				</fieldset>
 			</form>
 		</div>

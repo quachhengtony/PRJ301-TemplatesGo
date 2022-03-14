@@ -5,11 +5,16 @@
  */
 package models;
 
+import java.sql.Date;
+
 /**
  *
  * @author Tony Quach
  */
 public class Template {
+    public final static String SOURCE_CODE_PATH = "C:/Users/Thanh/Desktop/prjAss/TemplatesGo/web/sourceCode";
+    public final static String IMAGE_PATH = "C:/Users/Thanh/Desktop/prjAss/TemplatesGo/web/images";
+
     private int id;
     private int sellerId;
     private int categoryId;
@@ -18,13 +23,14 @@ public class Template {
     private float price;
     private String hostUrl;
     private String sourceCodePath;
-    private String createdDate;
-    private String lastModifiedDate;
+    private Date createdDate;
+    private Date lastModifiedDate;
     private int soldQuantity;
-    
-    public Template() {}
 
-    public Template(int sellerId, int categoryId, String name, String description, float price, String hostUrl, String sourceCodePath, String createdDate) {
+    public Template() {
+    }
+
+    public Template(int sellerId, int categoryId, String name, String description, float price, String hostUrl, String sourceCodePath, Date createdDate, Date lastModifiedDate, int soldQuantity) {
         this.sellerId = sellerId;
         this.categoryId = categoryId;
         this.name = name;
@@ -33,9 +39,11 @@ public class Template {
         this.hostUrl = hostUrl;
         this.sourceCodePath = sourceCodePath;
         this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+        this.soldQuantity = soldQuantity;
     }
 
-    public Template(int id, int sellerId, int categoryId, String name, String description, float price, String hostUrl, String sourceCodePath, String createdDate, String lastModifiedDate, int soldQuantity) {
+    public Template(int id, int sellerId, int categoryId, String name, String description, float price, String hostUrl, String sourceCodePath, Date createdDate, Date lastModifiedDate, int soldQuantity) {
         this.id = id;
         this.sellerId = sellerId;
         this.categoryId = categoryId;
@@ -113,19 +121,19 @@ public class Template {
         this.sourceCodePath = sourceCodePath;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public String getLastModifiedDate() {
+    public Date getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(String lastModifiedDate) {
+    public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
