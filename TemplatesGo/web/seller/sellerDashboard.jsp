@@ -116,7 +116,7 @@
                                         <td >
                                             <br><b>Source Code:</b> <a href="${pageContext.request.contextPath}/sourceCode${template.sourceCodePath}" download="">Download</a> </br>
                                             Update Source Code: <input type="file" name="sourceCode" accept=".zip">
-                                            <br><b>Price:</b> $<input type="number" name="price" value="${template.price}" required=""> </br>   
+                                            <br><b>Price:</b> $<input type="number" step="0.01" min="0" name="price" value="${template.price}" required=""> </br>   
                                             <br><b>Sold Quantity:</b> <input type="number" name="soldQuantity" value="${template.soldQuantity}" readonly=""> </br> 
                                             <br><b>Date Created:</b> <input type="text" name="soldQuantity" value="${template.createdDate}" readonly=""></br> 
                                             <input type="hidden" name="templateId" value="${template.id}">

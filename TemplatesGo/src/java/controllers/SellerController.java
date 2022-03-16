@@ -6,6 +6,7 @@
 package controllers;
 
 import dbmanager.CategoryManager;
+import dbmanager.ReportManager;
 import dbmanager.TemplateImageManager;
 import dbmanager.TemplateManager;
 import java.io.File;
@@ -43,6 +44,7 @@ public class SellerController extends HttpServlet {
         CategoryManager cateManager = new CategoryManager();
         TemplateManager tempManager = new TemplateManager();
         TemplateImageManager tempImgManager = new TemplateImageManager();
+        ReportManager reportManager = new ReportManager();
         if ("/dashboard".equals(path)) {
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
             ArrayList<Category> cateList = cateManager.getCategoryList();
@@ -87,13 +89,6 @@ public class SellerController extends HttpServlet {
                                                     new Date(System.currentTimeMillis()),
                                                     new Date(System.currentTimeMillis()),
                                                     0));
-
-            
-            try {
-                sourceCode.get(0).write(new File(Template.SOURCE_CODE_PATH + "/Template_" + tempId + ".zip"));
-                tempManager.updateSourceCodePath(tempId, "/Template_" + tempId + ".zip");
-            } catch (Exception e) {
-            }
             
             try {
                 for (FileItem image : images) {
@@ -101,6 +96,11 @@ public class SellerController extends HttpServlet {
                     File theDir = new File(Template.IMAGE_PATH + "/Template_" + tempId);
                     if (!theDir.exists()) {
                         theDir.mkdirs();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(SellerController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     String imgName = image.getName();
                     String extension = imgName.substring(imgName.lastIndexOf("."), imgName.length());
@@ -109,8 +109,15 @@ public class SellerController extends HttpServlet {
                 }
             } catch (Exception e) {
             }
+            
             try {
-                Thread.sleep(10000);
+                sourceCode.get(0).write(new File(Template.SOURCE_CODE_PATH + "/Template_" + tempId + ".zip"));
+                tempManager.updateSourceCodePath(tempId, "/Template_" + tempId + ".zip");
+            } catch (Exception e) {
+            }
+            
+            try {
+                Thread.sleep(1500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(SellerController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -194,7 +201,7 @@ public class SellerController extends HttpServlet {
             tempManager.updateTemplate(temp);
             
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(SellerController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -203,16 +210,24 @@ public class SellerController extends HttpServlet {
         } else if ("/remove".equals(path)) {
             int templateId = Integer.parseInt(request.getParameter("id"));
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+            Template template = tempManager.getTemplateById(templateId);
             //delete  images
             ArrayList<TemplateImage> imgList = tempImgManager.getImageList(templateId);
             for (TemplateImage img : imgList) {
                 File imgFile = new File(Template.IMAGE_PATH + img.getPath());
                 imgFile.delete();
             }
-            //delete directory
+            //delete image directory
             new File(Template.IMAGE_PATH + "/Template_" + templateId).delete();
             tempImgManager.deleteTemplateImage(templateId);
+            //delete report
+            reportManager.deleteByTemplate(templateId);
+            //delete source code
+            new File(Template.SOURCE_CODE_PATH + template.getSourceCodePath()).delete();
+            
             tempManager.deleteTemplateById(templateId);
+            
+            
             
             response.sendRedirect(request.getContextPath() + "/Seller/dashboard?pageNo=" + pageNo);
         }

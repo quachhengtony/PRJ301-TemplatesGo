@@ -89,6 +89,20 @@ public class ReportManager {
         }
         return true;
     }
+    
+    public boolean deleteByTemplate(int templateId) {
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Report WHERE templateId = ?");
+            ps.setInt(1, templateId);
+
+            ps.execute();
+        } catch (Exception e) {
+
+        }
+        return true;
+    }
+    
     public boolean delete(int reportId) {
         try {
             Connection con = DBUtils.getConnection();

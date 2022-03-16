@@ -92,7 +92,7 @@
                                         <p>
 						<label>
 						Price <span class="edd-required-indicator">*</span></label>
-                                                <input class="edd-input" type="number" name="price" placeholder="Price" value="" required="">
+                                                <input class="edd-input" type="number" step="0.01" min="0" name="price" placeholder="Price" value="" required="">
 					</p>
                                         <p>
 						<label>
