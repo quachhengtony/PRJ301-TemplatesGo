@@ -93,13 +93,13 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a href="${pageContext.request.contextPath}/user/home.jsp" class="navbar-brand brand"> TEMPLATESGO </a>
+                <a href="#" class="navbar-brand brand"> TEMPLATESGO </a>
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/admin/accountList.jsp">Account List</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/admin/reviewReport.jsp">Review Report</a></li>
-                    <li class="propClone"><a href="#">Category Management</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/userList?pageNo=1">Account List</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/reportList?pageNo=1">Review Report</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/categoryManager">Category Management</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img style="width: 18px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/images/avatar.png" alt=""/>

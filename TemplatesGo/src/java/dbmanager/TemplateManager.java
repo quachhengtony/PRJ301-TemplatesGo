@@ -54,7 +54,7 @@ public class TemplateManager {
             preparedStatement.setInt(1, templateId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                template = new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createdDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity")));
+                template = new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getString("createDate"), resultSet.getString("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity")));
             }
             return template;
         } catch (Exception e) {

@@ -24,7 +24,7 @@ public class UserManager {
 
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO  dbo.User VALUES (?,?,?,?,?,?,?,?,?,? )");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO  [dbo].[User] VALUES (?,?,?,?,?,?,?,?,?,? )");
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getFirstName());
             ps.setString(3, user.getLastName());
@@ -46,12 +46,13 @@ public class UserManager {
         int count = 0;
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("select id from User");
+            PreparedStatement ps = con.prepareStatement("select id from [dbo].[User]");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return count;
@@ -61,7 +62,7 @@ public class UserManager {
         List<User> users = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM User ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM [dbo].[User] ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, limit);
             ResultSet rs = ps.executeQuery();
@@ -79,6 +80,7 @@ public class UserManager {
                         rs.getDate("unbanDate")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
 
         }
         return users;
@@ -88,9 +90,35 @@ public class UserManager {
         User user = null;
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("Select * from users where username = ?  and password = ? ");
+            PreparedStatement ps = con.prepareStatement("Select * from [dbo].[User] where username = ?  and password = ? ");
             ps.setString(1, username);
             ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User(rs.getInt("id"), 
+                        rs.getString("username"), 
+                        rs.getString("firstName"), 
+                        rs.getString("lastName"), 
+                        rs.getString("email"), 
+                        rs.getString("password"), 
+                        rs.getString("avartar"), 
+                        rs.getString("role"), 
+                        rs.getDate("createDate"), 
+                        rs.getBoolean("banStatus"), 
+                        rs.getDate("unbanDate"));
+            }
+        } catch (Exception e) {
+
+        }
+        return user;
+    }
+    
+    public User getUser(int userId) {
+        User user = null;
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("Select * from [dbo].[User] where id = ?");
+            ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 user = new User(rs.getInt("id"), 
@@ -115,7 +143,7 @@ public class UserManager {
         
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement(" UPDATE User SET username = ?, firstName = ?, lastName= ? ,email= ?, password= ? ,avartar= ? ,role = ?, createDate = ?, banStatus = ?, unbanDate = ? WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement(" UPDATE [dbo].[User] SET username = ?, firstName = ?, lastName= ? ,email= ?, password= ? ,avartar= ? ,role = ?, createDate = ?, banStatus = ?, unbanDate = ? WHERE id = ?");
             ps.setString(1, newUser.getUsername());
             ps.setString(2, newUser.getFirstName());
             ps.setString(3, newUser.getLastName());
@@ -133,7 +161,97 @@ public class UserManager {
 
         }
         return true;
+    }
+    
+    public void unbanUser(int userId) {
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("update [dbo].[User]\n"
+                    + "set banStatus = 0, unbanDate = null\n"
+                    + "where id= ?");
+            ps.setInt(1, userId);
+            ps.execute();
+        } catch (Exception e) {
 
+        }
+    }
+    
+    public int getSellerIdFromReport(int reportId) {
+        String sql = "select t1.id from [dbo].[User] t1\n"
+                + "join Template t2 on  t1.id = t2.sellerId\n"
+                + "join Report t3 on t3.templateId = t2.id\n"
+                + "where t3.id = ?";
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, reportId);
+            ResultSet rs = ps.executeQuery();
+            int id = -1;
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            return id;
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+    
+    public int getReporterIdFromReport(int reportId) {
+        String sql = "select t1.id from [dbo].[User] t1\n"
+                + "join Report t2 on t1.id = t2.reporterId\n"
+                + "where t2.id = ?";
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, reportId);
+            ResultSet rs = ps.executeQuery();
+            int id = -1;
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            return id;
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+    
+    public String getSellerNameFromReport(int reportId) {
+        String sql = "select t1.username from [dbo].[User] t1\n"
+                + "join Template t2 on  t1.id = t2.sellerId\n"
+                + "join Report t3 on t3.templateId = t2.id\n"
+                + "where t3.id = ?";
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, reportId);
+            ResultSet rs = ps.executeQuery();
+            String username = "";
+            if (rs.next()) {
+                username = rs.getString("username");
+            }
+            return username;
+        } catch (Exception e) {
+        }
+        return "";
+    }
+    
+    public String getReporterNameFromReport(int reportId) {
+        String sql = "select t1.username from [dbo].[User] t1\n"
+                + "join Report t2 on t1.id = t2.reporterId\n"
+                + "where t2.id = ?";
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, reportId);
+            ResultSet rs = ps.executeQuery();
+            String username = "";
+            if (rs.next()) {
+                username = rs.getString("username");
+            }
+            return username;
+        } catch (Exception e) {
+        }
+        return "";
     }
 
     public boolean deleteUser(int userId) {
@@ -141,7 +259,7 @@ public class UserManager {
                 
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("DELETE  FROM User WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE  FROM [dbo].[User] WHERE id = ?");
             ps.setInt(1, user.getId());
             
             ps.executeQuery();
