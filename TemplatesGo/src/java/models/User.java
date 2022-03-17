@@ -29,6 +29,15 @@ public class User {
     public User() {
     }
 
+    public User(int id, String username, String firstName, String lastName, String password, String avatar) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.avatar = avatar;
+    }
+
     public User(String username, String firstName, String lastName, String email, String password, String avatar, String role, Date createDate, boolean banStatus, Date unbanDate) {
         this.username = username;
         this.firstName = firstName;

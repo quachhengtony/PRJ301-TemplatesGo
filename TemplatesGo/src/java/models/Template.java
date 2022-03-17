@@ -38,6 +38,19 @@ public class Template {
         this.sourceCodePath = sourceCodePath;
         this.createdDate = createdDate;
     }
+    
+    public Template(int sellerId, int categoryId, String name, String description, float price, String hostUrl, String sourceCodePath, Date createdDate, Date lastModifiedDate, int soldQuantity) {
+        this.sellerId = sellerId;
+        this.categoryId = categoryId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.hostUrl = hostUrl;
+        this.sourceCodePath = sourceCodePath;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+        this.soldQuantity = soldQuantity;
+    }
 
     public Template(int id, int sellerId, int categoryId, String name, String description, float price, String hostUrl, String sourceCodePath, Date createdDate, Date lastModifiedDate, int soldQuantity) {
         this.id = id;
