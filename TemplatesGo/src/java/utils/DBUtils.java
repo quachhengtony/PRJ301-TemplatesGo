@@ -13,7 +13,7 @@ import java.sql.DriverManager;
  * @author Thanh
  */
 public class DBUtils {
-    public static Connection getConnection() throws Exception {
+ public static Connection getConnection() throws Exception {
         String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
         if (instance == null || instance.trim().isEmpty()) {
             url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
@@ -26,5 +26,5 @@ public class DBUtils {
     private final static String portNumber = "1433";
     private final static String instance = ""; //LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
     private final static String userID = "sa";
-    private final static String password = "Tthanh0412";
+    private final static String password = "P4ssw0rd";
 }

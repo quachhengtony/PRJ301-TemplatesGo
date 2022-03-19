@@ -77,7 +77,7 @@ public class UserManager {
                         rs.getString("lastName"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        rs.getString("avartar"),
+                        rs.getString("avatar"),
                         rs.getString("role"),
                         rs.getDate("createDate"),
                         rs.getBoolean("banStatus"),

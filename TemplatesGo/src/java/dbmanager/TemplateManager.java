@@ -18,6 +18,7 @@ import utils.DBUtils;
  * @author Tony Quach
  */
 public class TemplateManager {
+
     public int getSize(int sellerId) {
         String sql = "select id from Template where sellerId = ?";
         try {
@@ -90,7 +91,7 @@ public class TemplateManager {
         }
         return -1;
     }
-    
+
     public boolean updateSourceCodePath(int tempId, String path) {
         String sql = "UPDATE Template SET sourceCodePath = ? WHERE id = ?";
         try {
@@ -98,7 +99,12 @@ public class TemplateManager {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, new String[]{"id"});
             preparedStatement.setInt(2, tempId);
             preparedStatement.setString(1, path);
-        return 0;
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 
     public boolean addTemplateImage(int templateId, String imagePath) {

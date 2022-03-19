@@ -65,81 +65,81 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div id="edd_checkout_wrap" class="col-md-12">
-                            
-                            <table id="edd_checkout_cart" class="ajaxed">
-                                <thead>
-                                    <tr class="edd_cart_header_row">
-                                        <th>
-                                            Item Image
-                                        </th>
-                                        <th colspan="2" style="text-align: center">
-                                            Item Info
-                                        </th>
-                                        <th>
-                                            Update
-                                        </th>
-                                        <th>
-                                            Delete
-                                        </th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                
-                                    <c:forEach var="template" items="${requestScope.tempList}">
-                                        <tr class="edd_cart_item">
-                                    <form action="${pageContext.request.contextPath}/Seller/update" method="POST" enctype="multipart/form-data">
+                    <table id="edd_checkout_cart" class="ajaxed">
+                        <thead>
+                            <tr class="edd_cart_header_row">
+                                <th>
+                                    Item Image
+                                </th>
+                                <th colspan="2" style="text-align: center">
+                                    Item Info
+                                </th>
+                                <th>
+                                    Update
+                                </th>
+                                <th>
+                                    Delete
+                                </th>
 
-                                        <td >
-                                            <div >
-                                                <c:forEach var="img" items="${imgList[template.id]}">
-                                                    <img width="120"  src="${pageContext.request.contextPath}/images${img.path}" alt=""> <br/><br/>
-                                                </c:forEach>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                            </div>
-                                            Update Images: <input type="file" name="images" accept="image/*" multiple="">
-                                        </td>
-                                        <td >
-                                            <br><b>Name:</b> <input type="text" name="name" value="${template.name}" required=""> </br>   
-                                            <br><b>Category:</b> 
-                                            <select name="categoryId" required="" >
-                                                <c:forEach var="cate" items="${requestScope.cateList}">
-                                                    <option value="${cate.id}" ${template.categoryId == cate.id ? "selected" : ""}>${cate.category}</option>
-                                                </c:forEach>
-                                            </select>
-                                            </br> 
-                                            <br><b>Description:</b> <textarea name="description">${template.description}</textarea> </br> 
-                                            <br><b>Host URL:</b> <input type="text" name="hostURL" value="${template.hostUrl}" required=""> </br>
-                                        </td>
-                                        <td >
-                                            <br><b>Source Code:</b> <a href="${pageContext.request.contextPath}/sourceCode${template.sourceCodePath}" download="">Download</a> </br>
-                                            Update Source Code: <input type="file" name="sourceCode" accept=".zip">
-                                            <br><b>Price:</b> $<input type="number" step="0.01" min="0" name="price" value="${template.price}" required=""> </br>   
-                                            <br><b>Sold Quantity:</b> <input type="number" name="soldQuantity" value="${template.soldQuantity}" readonly=""> </br> 
-                                            <br><b>Date Created:</b> <input type="text" name="soldQuantity" value="${template.createdDate}" readonly=""></br> 
-                                            <input type="hidden" name="templateId" value="${template.id}">
-                                            <input type="hidden" name="pageNo" value="${param.pageNo}">
-                                        </td>
-                                        <td >
-                                            <br><input class="edd_cart_remove_item_btn" type="submit" value="Update"></br> 
-                                        </td>
-                                    </form>
-                                    <td> 
-                                        <br><a class="edd_cart_remove_item_btn" href="${pageContext.request.contextPath}/Seller/remove?id=${template.id}&pageNo=${param.pageNo}"><button>Remove</button></a></br> 
-                                    </td>
+                            <c:forEach var="template" items="${requestScope.tempList}">
+                                <tr class="edd_cart_item">
+                            <form action="${pageContext.request.contextPath}/Seller/update" method="POST" enctype="multipart/form-data">
 
-                                </tr>
+                                <td >
+                                    <div >
+                                        <c:forEach var="img" items="${imgList[template.id]}">
+                                            <img width="120"  src="${pageContext.request.contextPath}/images${img.path}" alt=""> <br/><br/>
+                                        </c:forEach>
 
-                            </c:forEach>
-                            </tbody>
-                                
-                            </table>
-                                            
-                                            
-                
-                    
+                                    </div>
+                                    Update Images: <input type="file" name="images" accept="image/*" multiple="">
+                                </td>
+                                <td >
+                                    <br><b>Name:</b> <input type="text" name="name" value="${template.name}" required=""> </br>   
+                                    <br><b>Category:</b> 
+                                    <select name="categoryId" required="" >
+                                        <c:forEach var="cate" items="${requestScope.cateList}">
+                                            <option value="${cate.id}" ${template.categoryId == cate.id ? "selected" : ""}>${cate.category}</option>
+                                        </c:forEach>
+                                    </select>
+                                    </br> 
+                                    <br><b>Description:</b> <textarea name="description">${template.description}</textarea> </br> 
+                                    <br><b>Host URL:</b> <input type="text" name="hostURL" value="${template.hostUrl}" required=""> </br>
+                                </td>
+                                <td >
+                                    <br><b>Source Code:</b> <a href="${pageContext.request.contextPath}/sourceCode${template.sourceCodePath}" download="">Download</a> </br>
+                                    Update Source Code: <input type="file" name="sourceCode" accept=".zip">
+                                    <br><b>Price:</b> $<input type="number" step="0.01" min="0" name="price" value="${template.price}" required=""> </br>   
+                                    <br><b>Sold Quantity:</b> <input type="number" name="soldQuantity" value="${template.soldQuantity}" readonly=""> </br> 
+                                    <br><b>Date Created:</b> <input type="text" name="soldQuantity" value="${template.createdDate}" readonly=""></br> 
+                                    <input type="hidden" name="templateId" value="${template.id}">
+                                    <input type="hidden" name="pageNo" value="${param.pageNo}">
+                                </td>
+                                <td >
+                                    <br><input class="edd_cart_remove_item_btn" type="submit" value="Update"></br> 
+                                </td>
+                            </form>
+                            <td> 
+                                <br><a class="edd_cart_remove_item_btn" href="${pageContext.request.contextPath}/Seller/remove?id=${template.id}&pageNo=${param.pageNo}"><button>Remove</button></a></br> 
+                            </td>
+
+                            </tr>
+
+                        </c:forEach>
+                        </tbody>
+
+                    </table>
+
+
+
+
 
                 </div>
                 <nav aria-label="Page navigation example" style="text-align: center">
@@ -149,13 +149,14 @@
                             int remainder = size % 4 == 0 ? 0 : 1;
                             for (int i = 1; i <= size / 4 + remainder; i++) {
                         %>
-                        <li class="page-item <%if(i == pageNo) out.print("active"); %>">
+                        <li class="page-item <%if (i == pageNo)
+                                out.print("active");%>">
                             <a class="page-link" href="${pageContext.request.contextPath}/Seller/dashboard?pageNo=<%=i%>"><%=i%></a>
                         </li>
                         <%}%>
                     </ul>
                 </nav>
-                
+
             </div>
         </section>    
 

@@ -24,9 +24,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Category;
 import models.Template;
 import models.TemplateImage;
+import models.User;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
@@ -37,7 +39,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
  */
 public class SellerController extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getPathInfo();
@@ -46,30 +47,38 @@ public class SellerController extends HttpServlet {
         TemplateImageManager tempImgManager = new TemplateImageManager();
         ReportManager reportManager = new ReportManager();
         if ("/dashboard".equals(path)) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("seller")) {
+                response.sendRedirect(request.getContextPath() + "/User/login");
+                return;
+            }
+
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
             ArrayList<Category> cateList = cateManager.getCategoryList();
             int tempSize = tempManager.getSize(4);
-            List<Template> tempList = tempManager.getTemplatesBySellerId(4, (pageNo - 1) * 4, 4);
+            List<Template> tempList = tempManager.getTemplatesBySellerId(userSession.getId(), (pageNo - 1) * 4, 4);
             HashMap<Integer, ArrayList<TemplateImage>> imgList = new HashMap();
             for (Template template : tempList) {
                 imgList.put(template.getId(), tempImgManager.getImageList(template.getId()));
             }
-            
+
             request.setAttribute("cateList", cateList);
             request.setAttribute("size", tempSize);
             request.setAttribute("tempList", tempList);
             request.setAttribute("imgList", imgList);
-            
+
             request.getRequestDispatcher("/seller/sellerDashboard.jsp").forward(request, response);
         } else if ("/post".equals(path)) {
             ArrayList<Category> cateList = cateManager.getCategoryList();
             request.setAttribute("cateList", cateList);
-            
+
             request.getRequestDispatcher("/seller/postTemplate.jsp").forward(request, response);
         } else if ("/add".equals(path)) {
             ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
             Map<String, List<FileItem>> filesMap = upload.parseParameterMap(request);
-            
+
             int sellerId = Integer.parseInt(filesMap.get("sellerId").get(0).getString());
             String name = filesMap.get("name").get(0).getString();
             int cateId = new Integer(filesMap.get("categoryId").get(0).getString());
@@ -78,18 +87,28 @@ public class SellerController extends HttpServlet {
             List<FileItem> images = filesMap.get("images");
             float price = new Float(filesMap.get("price").get(0).getString());
             List<FileItem> sourceCode = filesMap.get("sourceCode");
-            
-            int tempId = tempManager.postTemplate(new Template(sellerId,
-                                                    cateId,
-                                                    name,
-                                                    description,
-                                                    price,
-                                                    hostURL,
-                                                    "",
-                                                    new Date(System.currentTimeMillis()),
-                                                    new Date(System.currentTimeMillis()),
-                                                    0));
-            
+
+            /*int tempId = tempManager.postTemplate(new Template(sellerId,
+                    cateId,
+                    name,
+                    description,
+                    price,
+                    hostURL,
+                    "",
+                    new Date(System.currentTimeMillis()),
+                    new Date(System.currentTimeMillis()),
+                    0));*/
+            int tempId = tempManager.postTemplateAndReturnId(new Template(sellerId,
+                    cateId,
+                    name,
+                    description,
+                    price,
+                    hostURL,
+                    "",
+                    new Date(System.currentTimeMillis()),
+                    new Date(System.currentTimeMillis()),
+                    0));
+
             try {
                 for (FileItem image : images) {
                     int imgId = tempImgManager.insertImage(new TemplateImage(tempId, ""));
@@ -109,13 +128,13 @@ public class SellerController extends HttpServlet {
                 }
             } catch (Exception e) {
             }
-            
+
             try {
                 sourceCode.get(0).write(new File(Template.SOURCE_CODE_PATH + "/Template_" + tempId + ".zip"));
                 tempManager.updateSourceCodePath(tempId, "/Template_" + tempId + ".zip");
             } catch (Exception e) {
             }
-            
+
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException ex) {
@@ -127,8 +146,7 @@ public class SellerController extends HttpServlet {
         } else if ("/update".equals(path)) {
             ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
             Map<String, List<FileItem>> filesMap = upload.parseParameterMap(request);
-            
-            
+
             int pageNo = Integer.parseInt(filesMap.get("pageNo").get(0).getString());
             int templateId = Integer.parseInt(filesMap.get("templateId").get(0).getString());
             String name = filesMap.get("name").get(0).getString();
@@ -138,7 +156,7 @@ public class SellerController extends HttpServlet {
             List<FileItem> images = filesMap.get("images");
             float price = new Float(filesMap.get("price").get(0).getString());
             List<FileItem> sourceCode = filesMap.get("sourceCode");
-            
+
             Template temp = tempManager.getTemplateById(templateId);
 
             if (images != null && images.size() != 0) {
@@ -171,7 +189,7 @@ public class SellerController extends HttpServlet {
                     }
                 }
             }
-            
+
             if (sourceCode != null && sourceCode.size() != 0) {
                 if (sourceCode.size() == 1 && sourceCode.get(0).getName() == "") {
 
@@ -188,10 +206,9 @@ public class SellerController extends HttpServlet {
                         Logger.getLogger(SellerController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
-                
+
             }
-            
+
             temp.setName(name);
             temp.setCategoryId(cateId);
             temp.setDescription(description);
@@ -199,7 +216,7 @@ public class SellerController extends HttpServlet {
             temp.setPrice(price);
             temp.setLastModifiedDate(new Date(System.currentTimeMillis()));
             tempManager.updateTemplate(temp);
-            
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
@@ -224,11 +241,9 @@ public class SellerController extends HttpServlet {
             reportManager.deleteByTemplate(templateId);
             //delete source code
             new File(Template.SOURCE_CODE_PATH + template.getSourceCodePath()).delete();
-            
+
             tempManager.deleteTemplateById(templateId);
-            
-            
-            
+
             response.sendRedirect(request.getContextPath() + "/Seller/dashboard?pageNo=" + pageNo);
         }
 

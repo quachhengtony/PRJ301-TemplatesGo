@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Category;
 import models.Report;
 import models.Template;
@@ -46,44 +47,69 @@ public class AdminController extends HttpServlet {
         ReportManager reportManager = new ReportManager();
         TemplateManager templateManager = new TemplateManager();
         CategoryManager categoryManager = new CategoryManager();
-        
+
         if ("/userList".equals(path)) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("admin")) {
+                response.sendRedirect(request.getContextPath() + "/Template/listing");
+                return;
+            }
+
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
             int userId = -1;
             if (request.getParameter("userId") != null) {
                 userId = Integer.parseInt(request.getParameter("userId"));
             }
-            
+
             int size = userManager.getSize();
             List<User> userList = userManager.getUserList((pageNo - 1) * 4, 4);
             if (userId > 0) {
                 User user = userManager.getUser(userId);
                 request.setAttribute("user", user);
             }
-            
+
             for (User user : userList) {
                 if (user.isBanStatus() && user.getUnbanDate().before(new Date(System.currentTimeMillis()))) {
                     userManager.unbanUser(user.getId());
-                } 
+                }
             }
-            
+
             request.setAttribute("size", size);
             request.setAttribute("list", userList);
-            
+
             request.getRequestDispatcher("/admin/accountList.jsp").forward(request, response);
         } else if ("/banUser".equals(path)) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("admin")) {
+                response.sendRedirect(request.getContextPath() + "/Template/listing");
+                return;
+            }
+            
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
             int userId = Integer.parseInt(request.getParameter("userId"));
             int numberBanDate = Integer.parseInt(request.getParameter("numberBanDate"));
-            
+
             User updateUser = userManager.getUser(userId);
             updateUser.setBanStatus(true);
-            updateUser.setUnbanDate(new Date(System.currentTimeMillis() + numberBanDate*24*60*60*1000));
-            
+            updateUser.setUnbanDate(new Date(System.currentTimeMillis() + numberBanDate * 24 * 60 * 60 * 1000));
+
             userManager.updateUser(updateUser);
-            
+
             response.sendRedirect(request.getContextPath() + "/Admin/userList?pageNo=" + pageNo);
         } else if ("/reportList".equals(path)) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("admin")) {
+                response.sendRedirect(request.getContextPath() + "/Template/listing");
+                return;
+            }
+            
+            
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
             int userId = -1, templateId = -1;
             if (request.getParameter("userId") != null) {
@@ -102,8 +128,7 @@ public class AdminController extends HttpServlet {
                 list = reportManager.list(statusStr, (pageNo - 1) * 4, 4);
                 size = reportManager.getSize(statusStr);
             }
-            
-            
+
             HashMap<Integer, String> sellerNameList = new HashMap<>();
             HashMap<Integer, Integer> sellerIdList = new HashMap<>();
             HashMap<Integer, String> reporterNameList = new HashMap<>();
@@ -111,13 +136,13 @@ public class AdminController extends HttpServlet {
             for (Report report : list) {
                 String sellerName = userManager.getSellerNameFromReport(report.getId());
                 sellerNameList.put(report.getId(), sellerName);
-                
+
                 int sellerId = userManager.getSellerIdFromReport(report.getId());
                 sellerIdList.put(report.getId(), sellerId);
-                
+
                 String reporterName = userManager.getReporterNameFromReport(report.getId());
                 reporterNameList.put(report.getId(), reporterName);
-                
+
                 int reporterId = userManager.getReporterIdFromReport(report.getId());
                 reporterIdList.put(report.getId(), reporterId);
             }
@@ -130,17 +155,16 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("template", template);
                 String cateName = categoryManager.getCategory(template.getCategoryId()).getCategory();
                 request.setAttribute("category", cateName);
-                
+
             }
-            
-            
+
             request.setAttribute("size", size);
             request.setAttribute("list", list);
             request.setAttribute("sellerNameList", sellerNameList);
             request.setAttribute("reporterNameList", reporterNameList);
             request.setAttribute("sellerIdList", sellerIdList);
             request.setAttribute("reporterIdList", reporterIdList);
-            
+
             request.getRequestDispatcher("/admin/reviewReport.jsp").forward(request, response);
         } else if ("/updateReport".equals(path)) {
             int pageNo = Integer.parseInt(request.getParameter("pageNo"));
@@ -149,18 +173,16 @@ public class AdminController extends HttpServlet {
             Report report = reportManager.load(reportId);
             report.setStatus(status);
             reportManager.update(report);
-            
-            
-            
+
             request.getRequestDispatcher("/Admin/reportList?pageNo=" + pageNo).forward(request, response);
         } else if ("/categoryManager".equals(path)) {
             List<Category> cateList = categoryManager.getCategoryList();
-            
+
             request.setAttribute("cateList", cateList);
-            
+
             request.getRequestDispatcher("/admin/categoryManager.jsp").forward(request, response);
         } else if ("/updateCategory".equals(path)) {
-            int cateId  = Integer.parseInt(request.getParameter("cateId"));
+            int cateId = Integer.parseInt(request.getParameter("cateId"));
             String cateName = request.getParameter("cateName");
             Category cate = new Category(cateId, cateName);
             categoryManager.updateCategory(cate);
@@ -178,7 +200,7 @@ public class AdminController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Admin/categoryManager");
             }
         }
-                
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
