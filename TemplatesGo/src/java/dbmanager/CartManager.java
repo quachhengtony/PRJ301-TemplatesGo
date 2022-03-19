@@ -56,7 +56,7 @@ public class CartManager {
         return isSucceed;
     }
     
-    Cart getCart(int buyerId) {
+    public Cart getCart(int buyerId) {
         Cart cart = null;
         try {
             String sql = "select templateId from CartItem\n" +
