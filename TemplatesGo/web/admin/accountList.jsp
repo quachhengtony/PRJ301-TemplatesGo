@@ -3,7 +3,7 @@
     Created on : Feb 22, 2022, 8:53:26 PM
     Author     : Thanh
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,9 +53,9 @@
 			</span>
 		</div>
 	</div>
-	<div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
-		<form id="edd_checkout_cart_form" method="post">
-			<div id="edd_checkout_cart_wrap">
+  
+        <div class="col-md-8 col-md-offset-2" >
+			<div >
 				<table id="edd_checkout_cart" class="ajaxed">
 				<thead>
 				<tr class="edd_cart_header_row">
@@ -77,45 +77,74 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
+                                <c:forEach var="user" items="${requestScope.list}">
+				<tr class="edd_cart_item" >
+                                    
                                     <td>
-                                        thanhpham0412
+                                        <a href="${pageContext.request.contextPath}/Admin/userList?pageNo=${param.pageNo}&userId=${user.id}">${user.username}</a>
                                     </td>
                                     <td>
-                                        Pham Trong Thanh
+                                        ${user.firstName}  ${user.lastName} 
                                     </td>
                                     <td>
-                                        thanh@gmail.com
+                                        ${user.email}
                                     </td>
                                     <td>
-                                        Buyer
+                                        ${user.role}
                                     </td>
                                     <td>
-                                        <form>
-                                            Input days: <input style="width: 50px;" type="number" name="banDate" required="">
-                                            <input type="submit" value="Ban">
-                                        </form>
+                                        <c:if test="${user.banStatus == true}">
+                                            Ban until: ${user.unbanDate} 
+                                        </c:if>
+                                        <c:if test="${user.banStatus == false}">
+                                            <form action="${pageContext.request.contextPath}/Admin/banUser" method="POST">
+                                                Input days: <input style="width: 50px;" type="number" name="numberBanDate" required="">
+                                                <input type="hidden" name="userId" value="${user.id}">
+                                                <input type="hidden" name="pageNo" value="${param.pageNo}">
+                                                <input type="submit" value="Ban">
+                                            </form>
+                                        </c:if>
+                                            
                                     </td>
-					
+                                    
 				</tr>
+                                </c:forEach>
 				</tbody>
 				</table>
 			</div>
-		</form>
+                <nav aria-label="Page navigation example" style="text-align: center">
+                    <ul class="pagination justify-content-center">
+                        <%
+                            int size = (int)request.getAttribute("size");
+                            int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+                            int remainder = size % 4 == 0 ? 0 : 1;
+                            for (int i = 1; i <= size / 4 + remainder; i++) {
+                        %>
+                        <li class="page-item <%if (i == pageNo) out.print("active"); %>">
+                            <a class="page-link " href="${pageContext.request.contextPath}/Admin/userList?pageNo=<%=i%>"><%=i%></a>
+                        </li>
+                        <%
+                            }
+                        %>
+                        
+                    </ul> 
+                </nav>
+                        <c:if test="${not empty requestScope.user}">
 		<div class="edd_clearfix properties-box " style="margin-bottom: 20px;">
                             <h3>User Info</h3>
 				<ul class="unstyle">
-                                        <li><b class="propertyname">Username:</b> thanhpham0412</li>
-                                        <li><b class="propertyname">First Name</b> Thanh</li>
-					<li><b class="propertyname">Last Name</b> Pham Trong</li>
-					<li><b class="propertyname">Email</b> thanh@gmail.com</li>
+                                        <li><b class="propertyname">Username:</b> ${user.username}</li>
+                                        <li><b class="propertyname">First Name</b> ${user.firstName}</li>
+					<li><b class="propertyname">Last Name</b> ${user.lastName}</li>
+					<li><b class="propertyname">Email</b> ${user.email}</li>
 					<li><b class="propertyname">Avatar</b> <img style="width:25px; display: inline-block;" class="img-circle img-responsive" src="../images/avatar.png" alt=""/></li>
-					<li><b class="propertyname">Role:</b> Buyer</li>
-					<li><b class="propertyname">Create Date:</b> 31/1/2022</li>
-					<li><b class="propertyname">Ban Status</b> -</li>
-					<li><b class="propertyname">Unban Date</b> -</li>
+					<li><b class="propertyname">Role:</b> ${user.role}</li>
+					<li><b class="propertyname">Create Date:</b> ${user.createDate}</li>
+					<li><b class="propertyname">Ban Status</b> ${user.banStatus}</li>
+					<li><b class="propertyname">Unban Date</b> ${user.unbanDate}</li>
 				</ul>
 		</div>
+                </c:if>
 	</div>
 </div>
 </section>

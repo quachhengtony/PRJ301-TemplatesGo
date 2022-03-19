@@ -55,6 +55,59 @@ public class ReportManager {
        
       return report;
   }
+  public List<Report> list(String status, int offset, int limit){
+      List<Report> report = new ArrayList<>();
+       
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Report where status = ? ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps.setString(1, status);
+            ps.setInt(2, offset);
+            ps.setInt(3, limit);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                report.add(new Report(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getString(6)));
+            }
+        } catch (Exception e) {
+
+        }
+
+       
+      return report;
+  }
+    public int getSize() {
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Report");
+            ResultSet rs = ps.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                count++;
+            }
+            return count;
+        } catch (Exception e) {
+
+        }
+        return -1;
+    }
+    
+    public int getSize(String status) {
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Report where status = ?");
+            ps.setString(1, status);
+            ResultSet rs = ps.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                count++;
+            }
+            return count;
+        } catch (Exception e) {
+
+        }
+        return -1;
+    }
+    
   public Report load(int reportId){
       Report load = null;
          try {
