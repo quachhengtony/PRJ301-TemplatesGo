@@ -21,7 +21,7 @@ public class CategoryManager {
     public boolean insertCategory(Category cate){
         try{
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO dbo.\"Category\" VALUES ( ? )");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Category VALUES ( ? )");
             ps.setString(1, cate.getCategory());
             ps.executeQuery();
         }catch(Exception e){
@@ -66,11 +66,28 @@ public class CategoryManager {
     
     public Category getCategory (int cateId){
         Category gcate = null;
-        Category category = new Category();
         try {
             Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select * from Category where id = ? ");
             ps.setInt(1, cateId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                gcate = new Category();
+                gcate.setId(rs.getInt("id"));
+                gcate.setCategory(rs.getString("category"));
+            }
+        }catch (Exception e){
+            
+        }
+        return gcate;
+    }
+    
+    public Category getCategory (String cateName){
+        Category gcate = null;
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("Select * from Category where category = ? ");
+            ps.setString(1, cateName);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 gcate = new Category();
