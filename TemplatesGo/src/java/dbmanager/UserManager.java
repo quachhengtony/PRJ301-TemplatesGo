@@ -16,15 +16,16 @@ import utils.DBUtils;
 
 /**
  *
- * @author Thanh
+ * @author Tony Quach
  */
 public class UserManager {
 
     public boolean addUser(User user) {
+        String sql = "INSERT INTO [User] (username, firstName, lastName, email, password, avatar, role, createDate, banStatus, unbanDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO  [dbo].[User] VALUES (?,?,?,?,?,?,?,?,?,? )");
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getFirstName());
             ps.setString(3, user.getLastName());
@@ -35,11 +36,14 @@ public class UserManager {
             ps.setDate(8, user.getCreateDate());
             ps.setBoolean(9, user.isBanStatus());
             ps.setDate(10, user.getUnbanDate());
-            ps.executeQuery();
+            int r = ps.executeUpdate();
+            if (r >= 0) {
+                return true;
+            }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
-        return true;
+        return false;
     }
 
     public int getSize() {
@@ -67,16 +71,16 @@ public class UserManager {
             ps.setInt(2, limit);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                users.add(new User(rs.getInt("id"), 
-                        rs.getString("username"), 
-                        rs.getString("firstName"), 
-                        rs.getString("lastName"), 
-                        rs.getString("email"), 
-                        rs.getString("password"), 
-                        rs.getString("avartar"), 
-                        rs.getString("role"), 
-                        rs.getDate("createDate"), 
-                        rs.getBoolean("banStatus"), 
+                users.add(new User(rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("avartar"),
+                        rs.getString("role"),
+                        rs.getDate("createDate"),
+                        rs.getBoolean("banStatus"),
                         rs.getDate("unbanDate")));
             }
         } catch (Exception e) {
@@ -86,31 +90,32 @@ public class UserManager {
         return users;
     }
 
-    public User getUser(String username, String password) {
-        User user = null;
+    public User getUser(String email, String password) {
+        User user = new User();
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("Select * from [dbo].[User] where username = ?  and password = ? ");
-            ps.setString(1, username);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM [User] WHERE email = ? AND password = ?");
+            ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                user = new User(rs.getInt("id"), 
-                        rs.getString("username"), 
-                        rs.getString("firstName"), 
-                        rs.getString("lastName"), 
-                        rs.getString("email"), 
-                        rs.getString("password"), 
-                        rs.getString("avartar"), 
-                        rs.getString("role"), 
-                        rs.getDate("createDate"), 
-                        rs.getBoolean("banStatus"), 
+                user = new User(rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("avatar"),
+                        rs.getString("role"),
+                        rs.getDate("createDate"),
+                        rs.getBoolean("banStatus"),
                         rs.getDate("unbanDate"));
             }
+            return user;
         } catch (Exception e) {
-
+            System.out.println(e);
         }
-        return user;
+        return null;
     }
     
     public User getUser(int userId) {
@@ -140,25 +145,19 @@ public class UserManager {
     }
 
     public boolean updateUser(User newUser) {
-        
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement(" UPDATE [dbo].[User] SET username = ?, firstName = ?, lastName= ? ,email= ?, password= ? ,avartar= ? ,role = ?, createDate = ?, banStatus = ?, unbanDate = ? WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE [User] SET username = ?, firstName = ?, lastName= ?, password = ?, avatar = ? WHERE id = ?");
             ps.setString(1, newUser.getUsername());
             ps.setString(2, newUser.getFirstName());
             ps.setString(3, newUser.getLastName());
-            ps.setString(4, newUser.getEmail());
-            ps.setString(5, newUser.getPassword());
-            ps.setString(6, newUser.getAvatar());
-            ps.setString(7, newUser.getRole());
-            ps.setDate(8, newUser.getCreateDate());
-            ps.setBoolean(9, newUser.isBanStatus());
-            ps.setDate(10,  newUser.getUnbanDate());
-            ps.setInt(11, newUser.getId());
-
-            ps.execute();
+            ps.setString(4, newUser.getPassword());
+            ps.setString(5, newUser.getAvatar());
+            ps.setInt(6, newUser.getId());
+            ps.executeUpdate();
+            return true;
         } catch (Exception e) {
-
+            System.out.println(e);
         }
         return true;
     }
@@ -256,12 +255,12 @@ public class UserManager {
 
     public boolean deleteUser(int userId) {
         User user = new User();
-                
+
         try {
             Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("DELETE  FROM [dbo].[User] WHERE id = ?");
             ps.setInt(1, user.getId());
-            
+
             ps.executeQuery();
         } catch (Exception e) {
 

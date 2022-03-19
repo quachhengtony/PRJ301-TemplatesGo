@@ -61,7 +61,7 @@
                                 Your message has been sent. Thank you!
                             </div>
                         </div>
-                        <form method="post" action="contact.php" id="contactform">
+                        <form method="POST" action="./login" id="contactform">
                             <div class="form">
                                 <input type="text" name="email" placeholder="Your E-mail Address *" required>
                                 <input type="password" name="password" placeholder="Your Password *" minlength="8" required>

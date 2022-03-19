@@ -3,7 +3,6 @@
     Created on : Mar 2, 2022, 8:54:32 PM
     Author     : Tony Quach
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,12 +59,31 @@
                                 Your message has been sent. Thank you!
                             </div>
                         </div>
-                        <form method="post" action="contact.php" id="contactform">
+                        <c:set var="errors" value="${requestScope.errors}"/>
+                        <c:if test="${not empty errors['password']}">
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                ${errors['password']}
+                            </div>
+                        </c:if>
+                         <c:if test="${not empty errors['username']}">
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                ${errors['username']}
+                            </div>
+                        </c:if>
+                         <c:if test="${not empty errors['email']}">
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                ${errors['email']}
+                            </div>
+                        </c:if>
+                        <form method="POST" action="./register" id="contactform">
                             <div class="form">
                                 <input type="text" name="username" placeholder="Your Username *" required>
                                 <input type="text" name="firstName" placeholder="Your First Name *" required>
                                 <input type="text" name="lastName" placeholder="Your Last Name *" required>
-                                <input type="text" name="email" placeholder="Your E-mail Address *" required>
+                                <input type="email" name="email" placeholder="Your E-mail Address *" required>
                                 <input type="password" name="password" placeholder="Your Password *" minlength="8" required>
                                 <input type="password" name="confirmPassword" placeholder="Confirm Password *" minlength="8" required>
                                 <label for="role">Register as a:</label>
@@ -86,7 +104,7 @@
             </div>
         </div>
     </section>
-    
+
     <%@include file="../layout/footer.jsp" %>
     <!-- SCRIPTS =============================-->
     <script src="js/jquery-.js"></script>
