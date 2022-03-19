@@ -4,7 +4,9 @@
     Author     : Thanh
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="role" value="admin"/>
+<%@page import="java.util.List,models.User" %>
+<c:set var="user" value="${sessionScope.userSession}"/>
+<c:set var="role" value="${user.role}"/>
 
 <c:if test="${role == ''}">
     <nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top">
@@ -18,9 +20,9 @@
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/user/home.jsp">Home</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/authentication/login.jsp">Log in</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/authentication/register.jsp">Sign up</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Template/listing">Home</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/User/login">Log in</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/User/register">Sign up</a></li>
                 </ul>
             </div>
         </div>
@@ -38,7 +40,7 @@
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/user/home.jsp">Home</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Template/listing">Home</a></li>
                     <li class="propClone"><a href="${pageContext.request.contextPath}/buyer/cart.jsp">Cart</a></li>
                     <li class="propClone"><a href="${pageContext.request.contextPath}/buyer/checkout.jsp">Checkout</a></li>
                     <li class="propClone dropdown">
@@ -68,14 +70,14 @@
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/seller/sellerDashboard.jsp">Dashboard</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/seller/postTemplate.jsp">Submit Template</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Seller/dashboard">Dashboard</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Template/submit">Submit Template</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img style="width: 18px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/images/avatar.png" alt=""/>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="${pageContext.request.contextPath}/user/account.jsp">Account</a></li>
+                            <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
                             <li><a href="#">Log out</a></li>
                         </ul>
                     </li>
@@ -93,13 +95,13 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a href="${pageContext.request.contextPath}/user/home.jsp" class="navbar-brand brand"> TEMPLATESGO </a>
+                <a href="#" class="navbar-brand brand"> TEMPLATESGO </a>
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/admin/accountList.jsp">Account List</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/admin/reviewReport.jsp">Review Report</a></li>
-                    <li class="propClone"><a href="#">Category Management</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/userList?pageNo=1">Account List</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/reportList?pageNo=1">Review Report</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/categoryManager">Category Management</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img style="width: 18px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/images/avatar.png" alt=""/>
@@ -117,4 +119,4 @@
 </c:if>
 
 
-                
+
