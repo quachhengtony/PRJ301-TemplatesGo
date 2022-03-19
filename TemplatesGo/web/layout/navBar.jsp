@@ -66,7 +66,7 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a href="${pageContext.request.contextPath}/user/home.jsp" class="navbar-brand brand"> TEMPLATESGO </a>
+                <a href="#" class="navbar-brand brand"> TEMPLATESGO </a>
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">

@@ -47,8 +47,8 @@ public class CategoryManager {
         return -1;
     }
     
-    public List<Category> getCategoryList(){
-        List<Category> cates = new ArrayList<>();
+    public ArrayList<Category> getCategoryList(){
+        ArrayList<Category> cates = new ArrayList<>();
         try{
             Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("Select * from Category");
@@ -59,7 +59,7 @@ public class CategoryManager {
             }
             return cates;
         } catch (Exception e){
-            
+            e.printStackTrace();
         }
         return cates;
     }

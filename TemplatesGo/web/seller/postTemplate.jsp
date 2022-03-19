@@ -3,7 +3,7 @@
     Created on : Feb 22, 2022, 8:52:52 PM
     Author     : Thanh
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,6 @@
                 </div>
             </div>
         </header>
-
         <!-- CONTENT =============================-->
         <section class="item content">
             <div class="container toparea">
@@ -56,7 +55,6 @@
                 <div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
                     <form id="edd_checkout_cart_form" method="post">
                         <div id="edd_checkout_cart_wrap">
-
                         </div>
                     </form>
                     <div id="edd_checkout_form_wrap" class="edd_clearfix">

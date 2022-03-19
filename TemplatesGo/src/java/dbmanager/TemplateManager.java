@@ -18,6 +18,22 @@ import utils.DBUtils;
  * @author Tony Quach
  */
 public class TemplateManager {
+    public int getSize(int sellerId) {
+        String sql = "select id from Template where sellerId = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, sellerId);
+            ResultSet rs = pstm.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                count++;
+            }
+            return count;
+        } catch (Exception e) {
+        }
+        return -1;
+    }
 
     public boolean postTemplate(Template template) {
         String sql = "INSERT INTO Template (sellerId, categoryId, name, description, price, hostURL, sourceCodePath, createdDate, lastModifiedDate, soldQuantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -72,6 +88,16 @@ public class TemplateManager {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return -1;
+    }
+    
+    public boolean updateSourceCodePath(int tempId, String path) {
+        String sql = "UPDATE Template SET sourceCodePath = ? WHERE id = ?";
+        try {
+            Connection connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, new String[]{"id"});
+            preparedStatement.setInt(2, tempId);
+            preparedStatement.setString(1, path);
         return 0;
     }
 
@@ -180,6 +206,7 @@ public class TemplateManager {
             preparedStatement.setString(5, template.getHostUrl());
             preparedStatement.setString(6, template.getSourceCodePath());
             preparedStatement.setDate(7, template.getLastModifiedDate());
+            preparedStatement.setInt(8, template.getId());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             int id = 0;
