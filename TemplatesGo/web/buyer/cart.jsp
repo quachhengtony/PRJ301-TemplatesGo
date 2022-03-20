@@ -4,6 +4,7 @@
     Author     : Thanh
 --%>
 
+<%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -72,20 +73,21 @@
 				</tr>
 				</thead>
 				<tbody>
+                                    <c:forEach var="item" items="${requestScope.templateList}">
 				<tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
-					<td class="edd_cart_item_name">
-						<div class="edd_cart_item_image">
-							<img width="25" height="25" src="../images/scorilo2-70x70.jpg" alt="">
-						</div>
-						<span class="edd_checkout_cart_item_title">Audio Item - Single License</span>
+                                    
+					<td value="${item.id}">
+                                            ${item.name}
 					</td>
 					<td class="edd_cart_item_price">
-						 $11.99
+                                            ${item.price}
 					</td>
 					<td class="edd_cart_actions">
-						<a class="edd_cart_remove_item_btn" href="#">Remove</a>
+						<a class="edd_cart_remove_item_btn" href="${pageContext.request.contextPath}/Cart/remove?templateId=${item.id}">Remove</a>
 					</td>
 				</tr>
+                                    </c:forEach>
+                                    
 				</tbody>
 				<tfoot>
 				
@@ -103,6 +105,8 @@
 			</div>
 		</form>
             <div style="margin-bottom: 10px;">
+                                
+                
                 <div style="width: 50%; display: inline-block;"><a style="padding-left: 20%;" href="${pageContext.request.contextPath}/user/home.jsp"><button class="edd-submit button">Continue Shopping</button></a></div>
                 <div style="width: 50%; display: inline-block; float: right;"><a style="padding-left: 20%" href="${pageContext.request.contextPath}/buyer/checkout.jsp"><button class="edd-submit button">Check out</button></a></div>
                 
