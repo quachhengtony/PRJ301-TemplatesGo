@@ -13,21 +13,21 @@ Developers, designers, freelancers, and others in technology-related fields.
 
 ## Features
 - Create accounts.
-- View, edit and delete account.
+- View and edit account.
 - Login and logout.
 - View, search, sort, filter templates.
 ##### Buyer:
 - Add templates to cart.
-- View, modify and delete cart items.
+- View, modify, delete cart items.
 - Checkout.
-- Feedback, report templates.
+- Report templates.
 ##### Seller:
-- Includes all buyer's features.
 - Submit templates to sell.
 - View, edit, delete templates.
 ##### Admin:
 - Review, approve reports.
 - Search, delete sellers' templates.
+- Manage categories.
 - Ban users.
 
 ## Sitemap
@@ -70,19 +70,11 @@ Developers, designers, freelancers, and others in technology-related fields.
 
 ## Database Design
 
-##### Logical design
-![TemplatesGo Logical Design Same Entities](/assets/database-designs/TemplatesGo_LogicalDesignSameEntities.png)
-
-##### Logical design (with Buyer and Seller entities represented seperately from Account entity)
-The Entity Relationship Diagram bellow shows how the entities will interact with eachothers.
-![TemplatesGo Logical Design Without Admin](/assets/database-designs/TemplatesGo_LogicalDesignWithoutAdmin.jpg)
-
 ##### Logical design (with Buyer, Seller, and Admin entities represented seperately from Account entity)
-The Entity Relationship Diagram bellow shows how Admin entity will interact with the rest of the system.
-![TemplatesGo Logical Design With Admin](/assets/database-designs/TemplatesGo_LogicalDesignWithAdmin.jpg)
+![TemplatesGo Logical Design](/assets/database-designs/TemplatesGo_LogicalDesign.png)
 
 ##### Physical design
-The database diagram bellow shows how the system's logical design is implemented in a database. Buyer, Seller, and Admin entity only exists in the logical design to better represent how the system works, and these entities is grouped into one singular entity (Account entity) in the physical design.
+The database diagram bellow shows how the system's logical design is implemented in the database. Buyer, Seller, and Admin entities only exist in the logical design to better represent how the system works, and these entities are grouped into one singular entity (Account entity) in the physical design.
 ![TemplatesGo Physical Design](/assets/database-designs/TemplatesGo_PhysicalDesign.jpg)
 
 ## System Design
@@ -93,7 +85,7 @@ The database diagram bellow shows how the system's logical design is implemented
 
 ##### Folder structures:
 The images bellow show how the system is implemented using the MVC model.
-| Plugin | Image |
+| Component | Image |
 | ------ | ------ |
 | Controllers | ![TemplatesGo Controller](/assets/screenshots/TemplatesGo_Controllers.png) |
 | Models | ![TemplatesGo Models](/assets/screenshots/TemplatesGo_Models.png) |
