@@ -103,7 +103,7 @@
 			</div>
 		</form>
 		<div id="edd_checkout_form_wrap" class="edd_clearfix">
-			<form id="edd_purchase_form" class="edd_form" action="#" method="POST">
+			<form id="edd_purchase_form" class="edd_form" action="./InsertHis" method="POST">
 				<fieldset id="edd_checkout_user_info">
 					<legend>Personal Info</legend>
 					<p id="edd-email-wrap">

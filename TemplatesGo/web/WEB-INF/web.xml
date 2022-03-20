@@ -20,6 +20,10 @@
         <servlet-name>SellerController</servlet-name>
         <servlet-class>controllers.SellerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>controllers.OrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/User/*</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>SellerController</servlet-name>
         <url-pattern>/Seller/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/Order/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,6 +6,7 @@
 package models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,13 +20,15 @@ public class Order {
 
     public Order() {
     }
-    
+
     public Order(int templateId, int sellerId, int buyerId, Date date) {
         this.templateId = templateId;
         this.sellerId = sellerId;
         this.buyerId = buyerId;
         this.date = date;
     }
+
+  
     
     public int getTemplateId() {
         return templateId;
@@ -58,6 +61,8 @@ public class Order {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
+
+   
 }
 
