@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import models.Cart;
 import utils.DBUtils;
 
@@ -22,7 +23,7 @@ public class CartManager {
     PreparedStatement pstm = null;
     ResultSet rs = null;
     
-    boolean insertCartItem(int buyerId, int templateId) {
+    public boolean insertCartItem(int buyerId, int templateId) {
         boolean isSucceed = false;
         try {
             String sql = "insert into CartItem (buyerId, templateId)\n" +
@@ -39,7 +40,7 @@ public class CartManager {
         return isSucceed;
     }
     
-    boolean checkCartItem(int buyerId, int templateId) {
+    public boolean checkCartItem(int buyerId, int templateId) {
         boolean isSucceed = false;
         try {
             String sql = "select templateId from CartItem\n" +
@@ -55,7 +56,7 @@ public class CartManager {
         }
         return isSucceed;
     }
-    
+
     public Cart getCart(int buyerId) {
         Cart cart = null;
         try {
@@ -75,7 +76,7 @@ public class CartManager {
         return cart;
     }
     
-    boolean deleteCartItem(int buyerId, int templateId) {
+    public boolean deleteCartItem(int buyerId, int templateId) {
         boolean isSucceed = false;
         try {
             String sql = "delete from CartItem\n"
@@ -92,7 +93,7 @@ public class CartManager {
         return isSucceed;
     }
     
-    boolean deleteCart(int buyerId) {
+    public boolean deleteCart(int buyerId) {
         boolean isSucceed = false;
         try {
             String sql = "delete from CartItem\n"

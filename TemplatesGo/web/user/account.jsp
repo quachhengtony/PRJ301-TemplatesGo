@@ -3,7 +3,9 @@
     Created on : Mar 2, 2022, 9:22:18 PM
     Author     : Tony Quach
 --%>
-
+<%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List,models.User" %>
+<c:set var="user" value="${requestScope.user}"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -50,41 +52,36 @@
                         </div>
                         <div class="alert">
                             <div class="slide-text">
-                                <img src="http://wowthemes.net/demo/salique/salique-boxed/images/temp/avatar2.png" alt="Avatar" onclick="handleTriggerAvatarUpload()">
+                                <img src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt="Avatar" onclick="handleTriggerAvatarUpload()">
                             </div>
                         </div>
-                        <form method="post" action="contact.php" id="contactform">
-                            <div class="form">
-                                <input type="file" id="avatarImage" name="avatarImage" accept="image/*" style="display:none">
-                                <input type="text" name="username" placeholder="Your Username *" required>
-                                <input type="text" name="firstName" placeholder="Your First Name *" required>
-                                <input type="text" name="lastName" placeholder="Your Last Name *" required>
-                                <input type="text" name="email" placeholder="Your E-mail Address *" required>
-                                <input type="password" name="password" placeholder="Your Password *" minlength="8" required>
-                                <label for="role">Register as a:</label>
-                                <select name="role" id="role">
-                                    <option value="buyer">Buyer</option>
-                                    <option value="seller">Seller</option>
-                                </select>
-                                <input type="submit" id="submit" class="clearfix btn" value="Update">
-                            </div>
+                        <form action="./update" method="POST" id="contactform" enctype="multipart/form-data">
+                            <input type="text" name="id" value="${user.id}" hidden>
+                            <input type="file" id="avatarImage" name="avatar" accept="image/*" style="display:none">
+                            <input type="text" name="username" value="${user.username}">
+                            <input type="text" name="firstName" value="${user.firstName}">
+                            <input type="text" name="lastName" value="${user.lastName}">
+                            <input type="email" value="${user.email}" disabled>
+                            <input type="password" name="password" placeholder="Your New Password *" minlength="8" value="${user.password}">
+                            <label for="role">Registered as a: ${user.role}</label>
+                            <input type="submit" class="clearfix btn" value="Update">
                         </form>
                     </div>
                 </div>
             </div>
-    </section>
+        </section>
 
         <%@include file="../layout/footer.jsp" %>
-    <!-- SCRIPTS =============================-->
-    <script type="text/javascript">
-        function handleTriggerAvatarUpload() {
-            document.getElementById("avatarImage").click();
-        }
-    </script>
-    <script src="${pageContext.request.contextPath}/js/avatarImageUpload.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery-.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/anim.js"></script>
-    <script src="${pageContext.request.contextPath}/js/validate.js"></script>
-</body>
+        <!-- SCRIPTS =============================-->
+        <script type="text/javascript">
+            function handleTriggerAvatarUpload() {
+                document.getElementById("avatarImage").click();
+            }
+        </script>
+        <script src="${pageContext.request.contextPath}/js/avatarImageUpload.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery-.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/anim.js"></script>
+        <script src="${pageContext.request.contextPath}/js/validate.js"></script>
+    </body>
 </html>
