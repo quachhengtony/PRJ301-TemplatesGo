@@ -83,7 +83,7 @@
 						 $11.99
 					</td>
 					<td class="edd_cart_actions">
-						<a class="edd_cart_remove_item_btn" href="#">Remove</a>
+						<a class="edd_cart_remove_item_btn" href="${pageContext.request.contextPath}/Cart/remove?templateId=${item.id}">Remove</a>
 					</td>
 				</tr>
 				</tbody>
@@ -147,9 +147,11 @@
 						<strong>Purchase Total:</strong>
 						<span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">$11.99</span>
 					</p>
+                                        <form action="${pageContext.request.contextPath}/Order/InsertHis">
 					<input type="hidden" name="edd_action" value="purchase">
 					<input type="hidden" name="edd-gateway" value="manual">
 					<input type="submit" class="edd-submit button" id="edd-purchase-button" name="edd-purchase" value="Purchase">
+                                        </form>
 				</fieldset>
 			</form>
 		</div>
