@@ -103,7 +103,6 @@
 			</div>
 		</form>
 		<div id="edd_checkout_form_wrap" class="edd_clearfix">
-			<form id="edd_purchase_form" class="edd_form" action="./InsertHis" method="POST">
 				<fieldset id="edd_checkout_user_info">
 					<legend>Personal Info</legend>
 					<p id="edd-email-wrap">
@@ -147,9 +146,7 @@
 						<strong>Purchase Total:</strong>
 						<span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">$11.99</span>
 					</p>
-                                        <form action="${pageContext.request.contextPath}/Order/InsertHis">
-					<input type="hidden" name="edd_action" value="purchase">
-					<input type="hidden" name="edd-gateway" value="manual">
+                                        <form action="${pageContext.request.contextPath}/Order/insertHis">
 					<input type="submit" class="edd-submit button" id="edd-purchase-button" name="edd-purchase" value="Purchase">
                                         </form>
 				</fieldset>

@@ -108,4 +108,20 @@ public class CartManager {
         }
         return isSucceed;
     }
+    
+    public boolean deleteCartByTemplate(int templateId) {
+        boolean isSucceed = false;
+        try {
+            String sql = "delete from CartItem\n"
+                    + "where templateId = ?";
+            conn = DBUtils.getConnection();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, templateId);
+            int affectedRow = pstm.executeUpdate();
+            if (affectedRow != 0) 
+                isSucceed = true;
+        } catch (Exception e) {
+        }
+        return isSucceed;
+    }
 }

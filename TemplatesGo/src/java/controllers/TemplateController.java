@@ -186,7 +186,7 @@ public class TemplateController extends HttpServlet {
                             templateManager.addTemplateImage(createdTemplateId, fileName);
                         }
                     }
-                    response.sendRedirect(request.getContextPath() + "/Template/listing");
+                    response.sendRedirect(request.getContextPath() + "/Seller/dashboard?pageNo=1");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

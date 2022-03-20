@@ -91,7 +91,7 @@ public class UserManager {
     }
 
     public User getUser(String email, String password) {
-        User user = new User();
+        User user = null;
         try {
             Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM [User] WHERE email = ? AND password = ?");

@@ -8,7 +8,7 @@
 <c:set var="user" value="${sessionScope.userSession}"/>
 <c:set var="role" value="${user.role}"/>
 
-<c:if test="${role == ''}">
+<c:if test="${empty role}">
     <nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">

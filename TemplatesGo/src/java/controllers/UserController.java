@@ -85,7 +85,7 @@ public class UserController extends HttpServlet {
                     }
 
                     Pattern emailPattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-                    if (emailPattern.matcher(email).matches()) {
+                    if (!emailPattern.matcher(email).matches()) {
                         errors.put("email", "Email must be in valid format.");
                         hasError = true;
                         request.setAttribute("errors", errors);

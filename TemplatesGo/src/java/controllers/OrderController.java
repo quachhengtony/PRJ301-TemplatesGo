@@ -44,7 +44,7 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String path = request.getPathInfo();
-        if (path.equals("/InsertHis")) {
+        if (path.equals("/insertHis")) {
              boolean check = true;
             try {
                 HttpSession httpSession = request.getSession();
@@ -60,8 +60,6 @@ public class OrderController extends HttpServlet {
 
                 CartManager cartManager = new CartManager();
                 Cart cart = cartManager.getCart(userSession.getId());
-
-                ArrayList<Template> templateList = new ArrayList();
                
                 for (int id : cart.getTemplateList()) {
                     
@@ -70,13 +68,12 @@ public class OrderController extends HttpServlet {
                     check = or.insertOrder(id, template.getTemplateById(id).getSellerId(), userSession.getId(), date);
                 }
                 if (check != true) {
-                     RequestDispatcher rd = request.getRequestDispatcher("/buyer/checkout.jsp");
-                rd.forward(request, response);
+                    RequestDispatcher rd = request.getRequestDispatcher("/buyer/checkout.jsp");
+                    rd.forward(request, response);
                    
                 }else{
-                      response.sendRedirect(request.getContextPath() + "/Cart/Purchase");
+                    request.getRequestDispatcher("/Cart/purchase").forward(request, response);
                 }
-                request.setAttribute("cart", cart);
 
             } catch (Exception e) {
             }

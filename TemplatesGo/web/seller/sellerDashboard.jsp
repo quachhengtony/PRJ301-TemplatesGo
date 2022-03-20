@@ -90,12 +90,12 @@
 
                             <c:forEach var="template" items="${requestScope.tempList}">
                                 <tr class="edd_cart_item">
-                            <form action="${pageContext.request.contextPath}/Seller/update" method="POST" enctype="multipart/form-data">
-
+                            <form action="./update" method="POST" enctype="multipart/form-data">
+                                    
                                 <td >
                                     <div >
                                         <c:forEach var="img" items="${imgList[template.id]}">
-                                            <img width="120"  src="${pageContext.request.contextPath}/images${img.path}" alt=""> <br/><br/>
+                                            <img width="120"  src="${pageContext.request.contextPath}/uploads/${img.path}" alt=""> <br/><br/>
                                         </c:forEach>
 
                                     </div>
@@ -114,7 +114,7 @@
                                     <br><b>Host URL:</b> <input type="text" name="hostURL" value="${template.hostUrl}" required=""> </br>
                                 </td>
                                 <td >
-                                    <br><b>Source Code:</b> <a href="${pageContext.request.contextPath}/sourceCode${template.sourceCodePath}" download="">Download</a> </br>
+                                    <br><b>Source Code:</b> <a href="${pageContext.request.contextPath}/uploads/${template.sourceCodePath}" download="">Download</a> </br>
                                     Update Source Code: <input type="file" name="sourceCode" accept=".zip">
                                     <br><b>Price:</b> $<input type="number" step="0.01" min="0" name="price" value="${template.price}" required=""> </br>   
                                     <br><b>Sold Quantity:</b> <input type="number" name="soldQuantity" value="${template.soldQuantity}" readonly=""> </br> 
@@ -136,10 +136,6 @@
                         </tbody>
 
                     </table>
-
-
-
-
 
                 </div>
                 <nav aria-label="Page navigation example" style="text-align: center">
