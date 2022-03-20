@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="btn btn-buynow">$${template.price} - Add to Cart</a>
+                        <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="btn btn-buynow">$${template.price} - Add to Cart</a>
                         <div class="properties-box">
                             <ul class="unstyle">
                                 <li><b class="propertyname">Name:</b> ${template.name}</li>
@@ -85,10 +85,10 @@
 
                                 <c:if test="${template.categoryId=='1'}">
                                     <li><b class="propertyname">Category:</b> Business</li>
-                                </c:if>
-                                <c:if test="${template.categoryId=='2'}">
+                                    </c:if>
+                                    <c:if test="${template.categoryId=='2'}">
                                     <li><b class="propertyname">Category:</b> Not Business</li>
-                                </c:if>
+                                    </c:if>
 
                                 <li><b class="propertyname">Hosted: </b> <a target="__blank" href="${template.hostUrl}">Visit Website</a></li>
                                 <li><b class="propertyname">Created Date:</b> ${template.createdDate}</li>

@@ -41,7 +41,7 @@
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="propClone"><a href="${pageContext.request.contextPath}/Template/listing">Home</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/buyer/cart.jsp">Cart</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Cart/cart">Cart</a></li>
                     <li class="propClone"><a href="${pageContext.request.contextPath}/buyer/checkout.jsp">Checkout</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -49,7 +49,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
-                            <li><a href="#">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/User/logout">Log out</a></li>
                         </ul>
                     </li>
 
@@ -78,7 +78,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
-                            <li><a href="#">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/User/logout">Log out</a></li>
                         </ul>
                     </li>
 
@@ -108,7 +108,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
-                            <li><a href="#">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/User/logout">Log out</a></li>
                         </ul>
                     </li>
 

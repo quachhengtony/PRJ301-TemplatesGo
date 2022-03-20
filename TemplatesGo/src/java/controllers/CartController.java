@@ -46,106 +46,98 @@ public class CartController extends HttpServlet {
         ReportManager reportManager = new ReportManager();
         TemplateManager templateManager = new TemplateManager();
         CategoryManager categoryManager = new CategoryManager();
-        
-        // addTemplate
-        if(path.equals("/add")){
+
+        if (path.equals("/add")) {
             try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
                 Integer buyerId = userSession.getId();
                 String templateId = request.getParameter("templateId");
-                
+
                 if (buyerId != null && templateId != null) {
                     CartManager cartManager = new CartManager();
                     boolean isSuccessful = cartManager.insertCartItem(buyerId, Integer.parseInt(templateId));
                     if (isSuccessful) {
-                        
+
                     }
                 }
                 request.getRequestDispatcher("/buyer/cart.jsp").forward(request, response);
-            }catch(Exception e){
-                
+            } catch (Exception e) {
+
             }
-        }    
-        //viewCart
-        else if(path.equals("/cart")){
+        } else if (path.equals("/cart")) {
             try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
-                //String buyerId = request.getParameter("buyerId");
-                if (userSession == null ) {
+
+                if (userSession == null || !userSession.getRole().equals("buyer")) {
                     response.sendRedirect(request.getContextPath() + "/User/login");
-                }                    
+                }
                 CartManager cartManager = new CartManager();
-                
+
                 Cart cart = cartManager.getCart(userSession.getId());
-                ArrayList <Template> templateList = new ArrayList(); 
-                
-                for(int id:cart.getTemplateList()){
+                ArrayList<Template> templateList = new ArrayList();
+
+                for (int id : cart.getTemplateList()) {
                     templateList.add(templateManager.getTemplateById(id));
-                    
+
                 }
                 request.setAttribute("templateList", templateList);
                 request.setAttribute("cart", cart);
                 request.getRequestDispatcher("/buyer/cart.jsp").forward(request, response);
-            } catch(Exception e){
-                
+            } catch (Exception e) {
+
             }
-        }
-        //removeTemplate
-        else if(path.equals("/remove")){
-            try{
+        } else if (path.equals("/remove")) {
+            try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
                 Integer buyerId = userSession.getId();
                 Integer templateId = new Integer(request.getParameter("templateId"));
                 CartManager manager = new CartManager();
-                boolean remove = manager.deleteCartItem(buyerId,templateId);
+                boolean remove = manager.deleteCartItem(buyerId, templateId);
 
                 request.setAttribute("temp-remove", remove);
                 request.getRequestDispatcher("/buyer/cart.jsp").forward(request, response);
-            }catch(Exception e){
-                
-            }               
-        }
-        //checkout?buyerId=2
-        else if(path.equals("/checkout")){
-            try{
+            } catch (Exception e) {
+
+            }
+        } else if (path.equals("/checkout")) {
+            try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
                 Integer buyerId = userSession.getId();
-                
+
                 CartManager manager = new CartManager();
                 Cart cart = manager.getCart(buyerId);
-                ArrayList <Template> templateList = new ArrayList(); 
-                
-                for(int id:cart.getTemplateList()){
+                ArrayList<Template> templateList = new ArrayList();
+
+                for (int id : cart.getTemplateList()) {
                     templateList.add(templateManager.getTemplateById(id));
-                    
+
                 }
                 request.setAttribute("templateList", templateList);
                 request.setAttribute("cart", cart);
                 request.getRequestDispatcher("/buyer/checkout.jsp").forward(request, response);
-            }catch(Exception e){
-                
+            } catch (Exception e) {
+
             }
-        }    
-        //purchase
-        else if(path.equals("/purchase")){
-            try{
+        } //purchase
+        else if (path.equals("/purchase")) {
+            try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
                 Integer buyerId = userSession.getId();
-                
+
                 CartManager manager = new CartManager();
                 boolean cart = manager.deleteCart(buyerId);
 
-                request.setAttribute("purchase", cart);             
-                response.sendRedirect(request.getContextPath()+"/User/login");
-            }catch(Exception e){
-                
+                request.setAttribute("purchase", cart);
+                response.sendRedirect(request.getContextPath() + "/User/login");
+            } catch (Exception e) {
+
             }
-        }       
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

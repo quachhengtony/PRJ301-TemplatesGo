@@ -128,6 +128,16 @@ public class UserController extends HttpServlet {
             }
         }
 
+        if (path.equals("/logout")) {
+            try {
+                HttpSession httpSession = request.getSession();
+                httpSession.invalidate();
+                response.sendRedirect(request.getContextPath() + "/User/login");
+            } catch (Exception e) {
+                System.out.println("\n>>> " + e);
+            }
+        }
+
         if (path.equals("/account")) {
             HttpSession httpSession = request.getSession();
             User userSession = (User) httpSession.getAttribute("userSession");
@@ -179,7 +189,7 @@ public class UserController extends HttpServlet {
                             User updateUser = new User(Integer.parseInt(id), username.trim(), firstName.trim(), lastName.trim(), password.trim(), fileName);
                             userManager.updateUser(updateUser);
 
-                            HttpSession httpSession = request.getSession(true);
+                            HttpSession httpSession = request.getSession();
                             httpSession.invalidate();
                         }
                     }
