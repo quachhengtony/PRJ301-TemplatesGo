@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" >
                         <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="btn btn-buynow">$${template.price} - Add to Cart</a>
                         <div class="properties-box">
                             <ul class="unstyle">
