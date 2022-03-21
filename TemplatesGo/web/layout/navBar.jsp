@@ -16,7 +16,7 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a href="${pageContext.request.contextPath}/user/home.jsp" class="navbar-brand brand"> TEMPLATESGO </a>
+                <a href="${pageContext.request.contextPath}/Template/listing" class="navbar-brand brand"> TEMPLATESGO </a>
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -36,7 +36,7 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a href="${pageContext.request.contextPath}/user/home.jsp" class="navbar-brand brand"> TEMPLATESGO </a>
+                <a href="${pageContext.request.contextPath}/Template/listing" class="navbar-brand brand"> TEMPLATESGO </a>
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -45,7 +45,7 @@
                     <li class="propClone"><a href="${pageContext.request.contextPath}/buyer/checkout.jsp">Checkout</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img style="width: 18px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
+                            <img style="width: 25px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
@@ -66,7 +66,7 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a href="#" class="navbar-brand brand"> TEMPLATESGO </a>
+                <a href="${pageContext.request.contextPath}/Template/listing" class="navbar-brand brand"> TEMPLATESGO </a>
             </div>
             <div id="navbar-collapse-02" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -74,7 +74,7 @@
                     <li class="propClone"><a href="${pageContext.request.contextPath}/Template/submit">Submit Template</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img style="width: 18px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
+                            <img style="width: 25px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
@@ -104,7 +104,7 @@
                     <li class="propClone"><a href="${pageContext.request.contextPath}/Admin/categoryManager">Category Management</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img style="width: 18px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
+                            <img style="width: 25px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
