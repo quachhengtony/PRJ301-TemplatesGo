@@ -122,7 +122,7 @@ public class TemplateController extends HttpServlet {
             HttpSession httpSession = request.getSession();
             User user = (User) httpSession.getAttribute("userSession");
 
-            if (user == null || user.getRole().equals("buyer")) {
+            if (user == null || !user.getRole().equals("seller")) {
                 response.sendRedirect(request.getContextPath() + "/Template/listing");
                 return;
             }
@@ -133,7 +133,7 @@ public class TemplateController extends HttpServlet {
             HttpSession httpSession = request.getSession();
             User user = (User) httpSession.getAttribute("userSession");
 
-            if (user == null || user.getRole().equals("buyer")) {
+            if (user == null || !user.getRole().equals("seller")) {
                 response.sendRedirect(request.getContextPath() + "/User/login");
                 return;
             }
@@ -168,7 +168,7 @@ public class TemplateController extends HttpServlet {
                     for (Part part : request.getParts()) {
                         String fileName = extractFileName(part);
 
-                        if (fileName != null && fileName.length() > 0 && fileName.contains("zip")) {
+                        if (fileName != null && fileName.length() > 0 && (fileName.contains("zip") || fileName.contains("rar") || fileName.contains("7zip"))) {
                             filePath = fullSavePath + File.separator + fileName;
                             part.write(filePath);
 

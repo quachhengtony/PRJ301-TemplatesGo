@@ -5,6 +5,7 @@
 --%>
 <%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List,models.Template" %>
+<c:set var="user" value="${sessionScope.userSession}"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -77,7 +78,18 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="btn btn-buynow">$${template.price} - Add to Cart</a>
+                        <c:choose>
+                            <c:when test="${user == null}">
+                                <a href="${pageContext.request.contextPath}/User/login" class="btn btn-buynow">$${template.price} - Add to Cart</a>
+                            </c:when>
+                            <c:when test="${user.role == 'seller'}">
+                                <a class="btn btn-buynow" disabled>$${template.price} - Add to Cart</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="btn btn-buynow">$${template.price} - Add to Cart</a>
+                            </c:otherwise>
+                        </c:choose>
+
                         <div class="properties-box">
                             <ul class="unstyle">
                                 <li><b class="propertyname">Name:</b> ${template.name}</li>
