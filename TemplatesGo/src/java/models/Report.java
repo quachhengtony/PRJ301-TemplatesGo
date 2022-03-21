@@ -19,6 +19,14 @@ public class Report {
    private Date createDate;
    private String status;
 
+    public Report(int templateId, int reporterId, String content, Date createDate, String status) {
+        this.templateId = templateId;
+        this.reporterId = reporterId;
+        this.content = content;
+        this.createDate = createDate;
+        this.status = status;
+    }
+
     public Report(int id, int templateId, int reporterId, String content, Date createDate, String status) {
         this.id = id;
         this.templateId = templateId;

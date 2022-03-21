@@ -97,11 +97,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4" style="float: right">
-                        <div class="properties-box">
-                            <textarea placeholder="Your suggestion about template is here..." style="width: 90%; height:100px;"></textarea>
+                    <div class="col-md-4">
+                        <form class="properties-box" method="POST" action="./report">
+                            <input type="text" name="templateId" value="${template.id}" hidden>
+                            <textarea name="content" placeholder="What's wrong with this template?" style="width: 90%; height:100px;" required></textarea>
                             <input type="submit" value="Report">
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import models.Report;
 import models.Template;
 import utils.DBUtils;
 
@@ -453,5 +454,24 @@ public class TemplateManager {
             System.out.println(e);
         }
         return null;
+    }
+
+    public boolean createReport(Report report) {
+        String sql = "INSERT INTO Report (templateId, reporterId, content, createDate, status) VALUES (?, ?, ?, ?, ?)";
+        try {
+            Connection connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, report.getTemplateId());
+            preparedStatement.setInt(2, report.getReporterId());
+            preparedStatement.setString(3, report.getContent());
+            preparedStatement.setDate(4, report.getCreateDate());
+            preparedStatement.setString(5, report.getStatus());
+            if (preparedStatement.executeUpdate() >= 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 }
