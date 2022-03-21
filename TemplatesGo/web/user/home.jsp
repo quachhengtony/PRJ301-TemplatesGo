@@ -112,7 +112,7 @@
             <div class="container">
                 <div class="underlined-title">
                     <div class="editContent">
-                        <h1 class="text-center latestitems">TEMPLATES LIST</h1>
+                        <h1 class="text-center latestitems">TEMPLATE LISTING</h1>
                     </div>
                     <div class="wow-hr type_short">
                         <span class="wow-hr-h">

@@ -94,7 +94,7 @@ public class UserController extends HttpServlet {
 
                     if (hasError == false) {
                         UserManager userManager = new UserManager();
-                        User user = new User(username.trim(), firstName.trim(), lastName.trim(), email.trim(), password.trim(), "", role, date, false, date);
+                        User user = new User(username.trim(), firstName.trim(), lastName.trim(), email.trim(), password.trim(), "TemplatesGo_DefaultAvatar.jpg", role, date, false, date);
 
                         boolean addUserSuccess = userManager.addUser(user);
                         if (addUserSuccess) {
@@ -116,7 +116,7 @@ public class UserController extends HttpServlet {
                 if (email != null && password != null) {
                     UserManager userManager = new UserManager();
                     User user = userManager.getUser(email.trim(), password.trim());
-                    if (user != null) {
+                    if (user != null && user.isBanStatus() == false) {
                         HttpSession httpSession = request.getSession(true);
                         httpSession.setAttribute("userSession", user);
                         response.sendRedirect(request.getContextPath() + "/Template/listing");
