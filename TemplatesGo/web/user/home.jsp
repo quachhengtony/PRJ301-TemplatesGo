@@ -28,36 +28,20 @@
         <header class="item header margin-top-0">
             <div class="wrapper">
                 <%@include file="../layout/navBar.jsp" %>
+                 <c:set var="list" value="${requestScope.cate}"/> 
                 <!-- CATEGORY ====================-->
                 <ul class="nav nav-pills nav-fill" id='category'>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./listing?category=1">Business</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./listing?category=2">Art</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./listing?category=3">Education</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./listing?category=4">E-Commerce</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./listing?category=5">Real Estate</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./listing?category=6">Society</a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">More
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Category 1</a></li>
-                            <li><a href="#">Category 2</a></li>
-                            <li><a href="#">Category 3</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                   
+                            <li class="nav-item">
+                                <c:forEach var="o" items="${list}"> 
+                                    
+                        <a class="nav-link" href="./listing?category=${o.id}">${o.category}</a>
+                         </c:forEach>
+                    </li> 
+                    
+                   
+                   
+                                    </ul>
 
                 <div class="container">
                     <div class="row">
@@ -83,7 +67,7 @@
                         <input name="search" value="" class="form-control" type="text">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit" id="addressSearch">
-                                <i class="fa fa-search"></i> Search</span>
+                                <span>  <i class="fa fa-search"></i> Search</span>
                         </button>
                         </span>
                     </div>

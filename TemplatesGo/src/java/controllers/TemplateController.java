@@ -22,7 +22,7 @@ import javax.servlet.http.Part;
 import models.Report;
 import models.Template;
 import models.User;
-
+import models.Category;
 /**
  *
  * @author Tony Quach
@@ -49,9 +49,18 @@ public class TemplateController extends HttpServlet {
         String path = request.getPathInfo();
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-
-        if (path.equals("/listing")) {
+        
+       if (path.equals("/listingCate")) {
+            TemplateManager temp = new TemplateManager();
+            List<Category> a = temp.getCategory();
+            request.setAttribute("cate", a);
+            request.getRequestDispatcher("/seller/postTemplate.jsp").forward(request, response);
+        }else if (path.equals("/listing")) {
             try {
+             TemplateManager temp = new TemplateManager();
+            List<Category> a = temp.getCategory();
+            request.setAttribute("cate", a);
+    
                 int page = 1;
                 int recordsPerPage = 6;
                 if (request.getParameter("page") != null) {

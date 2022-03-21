@@ -19,7 +19,7 @@
         <title>Submit Template</title>
     </head>
     <body>
-
+         <c:set var="lis" value="${requestScope.cate}"/> 
         <!-- HEADER =============================-->
         <header class="item header margin-top-0">
             <div class="wrapper">
@@ -70,8 +70,10 @@
                                     <label class="edd-label" for="edd-first">
                                         Category: <span class="edd-required-indicator">*</span>
                                     </label>
-                                    <select name="category" required>
-                                        <option value="business">Business</option>
+                                    <select name="category">
+                                        <c:forEach var="o" items="${lis}">
+                                        <option value="${o.id}">${o.category}</option>
+                                        </c:forEach>
                                     </select>
                                 </p>
                                 <p id="edd-last-name-wrap">
