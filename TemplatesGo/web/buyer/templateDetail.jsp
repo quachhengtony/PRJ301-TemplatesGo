@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" >
                         <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="btn btn-buynow">$${template.price} - Add to Cart</a>
                         <div class="properties-box">
                             <ul class="unstyle">
@@ -97,7 +97,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="float: right">
                         <div class="properties-box">
                             <textarea placeholder="Your suggestion about template is here..." style="width: 90%; height:100px;"></textarea>
                             <input type="submit" value="Report">
