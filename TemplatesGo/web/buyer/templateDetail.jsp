@@ -89,7 +89,6 @@
                                 <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="btn btn-buynow">$${template.price} - Add to Cart</a>
                             </c:otherwise>
                         </c:choose>
-
                         <div class="properties-box">
                             <ul class="unstyle">
                                 <li><b class="propertyname">Name:</b> ${template.name}</li>
@@ -110,10 +109,11 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="properties-box">
-                            <textarea placeholder="Your suggestion about template is here..." style="width: 90%; height:100px;"></textarea>
+                        <form class="properties-box" method="POST" action="./report">
+                            <input type="text" name="templateId" value="${template.id}" hidden>
+                            <textarea name="content" placeholder="What's wrong with this template?" style="width: 90%; height:100px;" required></textarea>
                             <input type="submit" value="Report">
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

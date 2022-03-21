@@ -156,6 +156,8 @@
                         </div>
                     </c:forEach>
 
+                </div>
+                <div >
                     <nav aria-label="Page navigation example" style="text-align: center">
                         <ul class="pagination justify-content-center">
                             <c:if test="${currentPage != 1}">
@@ -180,7 +182,6 @@
                             </c:if>
                         </ul>
                     </nav>  
-
                 </div>
         </section>
 

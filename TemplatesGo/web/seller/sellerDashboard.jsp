@@ -57,14 +57,7 @@
                     </div>
 
                 </div>
-                <div >
-                    <div style="margin-bottom: 10px">
-                        <input type="text" style="width: 50%; margin-left: 23%;"  class="searchTerm" placeholder="What are you looking for?">
-                        <button type="submit" style="width: 4%" class="searchButton">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                
 
                 <div id="edd_checkout_wrap" class="col-md-12">
 
