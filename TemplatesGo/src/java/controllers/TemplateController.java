@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import models.Report;
 import models.Template;
 import models.User;
 import models.Category;
@@ -124,14 +125,14 @@ public class TemplateController extends HttpServlet {
                 request.getRequestDispatcher("/user/home.jsp").forward(request, response);
 
             } catch (Exception e) {
-
+                System.out.println(e);
             }
         }
         if (path.equals("/submit")) {
             HttpSession httpSession = request.getSession();
             User user = (User) httpSession.getAttribute("userSession");
 
-            if (user == null || user.getRole().equals("buyer")) {
+            if (user == null || !user.getRole().equals("seller")) {
                 response.sendRedirect(request.getContextPath() + "/Template/listing");
                 return;
             }
@@ -142,7 +143,7 @@ public class TemplateController extends HttpServlet {
             HttpSession httpSession = request.getSession();
             User user = (User) httpSession.getAttribute("userSession");
 
-            if (user == null || user.getRole().equals("buyer")) {
+            if (user == null || !user.getRole().equals("seller")) {
                 response.sendRedirect(request.getContextPath() + "/User/login");
                 return;
             }
@@ -177,7 +178,7 @@ public class TemplateController extends HttpServlet {
                     for (Part part : request.getParts()) {
                         String fileName = extractFileName(part);
 
-                        if (fileName != null && fileName.length() > 0 && fileName.contains("zip")) {
+                        if (fileName != null && fileName.length() > 0 && (fileName.contains("zip") || fileName.contains("rar") || fileName.contains("7zip"))) {
                             filePath = fullSavePath + File.separator + fileName;
                             part.write(filePath);
 
@@ -219,7 +220,32 @@ public class TemplateController extends HttpServlet {
                 }
                 request.getRequestDispatcher("/buyer/templateDetail.jsp").forward(request, response);
             } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
+        if (path.equals("/report")) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("buyer")) {
+                response.sendRedirect(request.getContextPath() + "/User/login");
+                return;
+            }
+
+            try {
+                String templateId = request.getParameter("templateId");
+                String content = request.getParameter("content");
+                if (templateId != null) {
+                    Report report = new Report(Integer.parseInt(templateId), userSession.getId(), content.trim(), date, "Waiting");
+                    TemplateManager templateManager = new TemplateManager();
+                    if (templateManager.createReport(report)) {
+                        response.sendRedirect(request.getContextPath() + "/Template/listing?detail=" + templateId);
+                    }
+                }
+                request.getRequestDispatcher("/buyer/templateDetail.jsp").forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
 

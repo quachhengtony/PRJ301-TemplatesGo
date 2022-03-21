@@ -42,7 +42,7 @@
             <div class="container toparea">
                 <div class="underlined-title">
                     <div class="editContent">
-                        <h1 class="text-center latestitems">Template Info</h1>
+                        <h1 class="text-center latestitems">Template Information</h1>
                     </div>
                     <div class="wow-hr type_short">
                         <span class="wow-hr-h">
@@ -60,15 +60,15 @@
                     <div id="edd_checkout_form_wrap" class="edd_clearfix">
                         <form id="edd_purchase_form" class="edd_form" action="./post" method="POST" enctype="multipart/form-data">
                             <fieldset id="edd_checkout_user_info">
-                                <legend>Template Info</legend>
+                                
                                 <p id="edd-email-wrap">
                                     <label class="edd-label" for="edd-email">
-                                        Template's Name <span class="edd-required-indicator">*</span></label>
-                                    <input class="edd-input required" type="text" name="name" placeholder="" id="edd-email" value="">
+                                        Name: <span class="edd-required-indicator">*</span></label>
+                                    <input class="edd-input required" type="text" name="name" id="edd-email" value="" required>
                                 </p>
                                 <p id="edd-first-name-wrap">
                                     <label class="edd-label" for="edd-first">
-                                        Category : <span class="edd-required-indicator">*</span>
+                                        Category: <span class="edd-required-indicator">*</span>
                                     </label>
                                     <select name="category">
                                         <c:forEach var="o" items="${lis}">
@@ -78,29 +78,30 @@
                                 </p>
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
-                                        Description:</label>
-                                    <input class="edd-input" type="text" name="description" id="edd-last" placeholder="" value="">
+                                        Description: <span class="edd-required-indicator">*</span></label>
+                                    <!--<input class="edd-input" type="text" name="description" id="edd-last" placeholder="" value="">-->
+                                    <textarea id="edd-last" class="edd-input" name="description" maxlength="3000" required></textarea>
                                 </p>
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
-                                        Host URL :</label>
-                                    <input class="edd-input" type="text" name="hostURL" id="edd-last" placeholder="" value="">
+                                        Host URL: </label>
+                                    <input class="edd-input" type="text" name="hostURL" id="edd-last" value="">
                                 </p>
 
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
-                                        Price : </label>
-                                    <input class="edd-input" type="text" name="price" id="edd-last" placeholder="" value="">
+                                        Price: <span class="edd-required-indicator">*</span></label>
+                                    <input class="edd-input" type="number" min="0" max="100" step=".1" name="price" id="edd-last" value="" required>
                                 </p>
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
-                                        Source Code : </label>
-                                    <input type="file" id="myFile" name="sourceCode" accept=".zip,.rar,.7zip">
+                                        Source Code: <span class="edd-required-indicator">*</span></label>
+                                    <input type="file" id="myFile" name="sourceCode" accept=".zip,.rar,.7zip" required>
                                 </p>
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
-                                        Images:</label>
-                                    <input type="file" id="myFile" name="file" accept="image/*" multiple>
+                                        Images: <span class="edd-required-indicator">*</span></label>
+                                    <input type="file" id="myFile" name="file" accept="image/*" multiple required>
                                 </p>
 
                             </fieldset>
