@@ -132,7 +132,7 @@ public class UserManager {
                         rs.getString("lastName"), 
                         rs.getString("email"), 
                         rs.getString("password"), 
-                        rs.getString("avartar"), 
+                        rs.getString("avatar"), 
                         rs.getString("role"), 
                         rs.getDate("createDate"), 
                         rs.getBoolean("banStatus"), 
@@ -154,6 +154,21 @@ public class UserManager {
             ps.setString(4, newUser.getPassword());
             ps.setString(5, newUser.getAvatar());
             ps.setInt(6, newUser.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return true;
+    }
+    
+    public boolean updateBanUser(User newUser) {
+        try {
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE [User] SET banStatus = ?, unbanDate = ? WHERE id = ?");
+            ps.setBoolean(1, newUser.isBanStatus());
+            ps.setDate(2, newUser.getUnbanDate());
+            ps.setInt(3, newUser.getId());
             ps.executeUpdate();
             return true;
         } catch (Exception e) {

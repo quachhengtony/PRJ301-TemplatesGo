@@ -150,15 +150,15 @@
         <div class="edd_clearfix properties-box " style="margin-bottom: 20px;">
             <h3>User Info</h3>
             <ul class="unstyle">
-                <li><b class="propertyname">Username:</b> ${user.username}</li>
-                <li><b class="propertyname">First Name</b> ${user.firstName}</li>
-                <li><b class="propertyname">Last Name</b> ${user.lastName}</li>
-                <li><b class="propertyname">Email</b> ${user.email}</li>
-                <li><b class="propertyname">Avatar</b> <img style="width:25px; display: inline-block;" class="img-circle img-responsive" src="../images/avatar.png" alt=""/></li>
-                <li><b class="propertyname">Role:</b> ${user.role}</li>
-                <li><b class="propertyname">Create Date:</b> ${user.createDate}</li>
-                <li><b class="propertyname">Ban Status</b> ${user.banStatus}</li>
-                <li><b class="propertyname">Unban Date</b> ${user.unbanDate}</li>
+                <li><b class="propertyname">Username:</b> ${requestScope.user.username}</li>
+                <li><b class="propertyname">First Name</b> ${requestScope.user.firstName}</li>
+                <li><b class="propertyname">Last Name</b> ${requestScope.user.lastName}</li>
+                <li><b class="propertyname">Email</b> ${requestScope.user.email}</li>
+                <li><b class="propertyname">Avatar</b> <img style="width:25px; display: inline-block;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${requestScope.user.avatar}" alt=""/></li>
+                <li><b class="propertyname">Role:</b> ${requestScope.user.role}</li>
+                <li><b class="propertyname">Create Date:</b> ${requestScope.user.createDate}</li>
+                <li><b class="propertyname">Ban Status</b> ${requestScope.user.banStatus}</li>
+                <li><b class="propertyname">Unban Date</b> ${requestScope.user.unbanDate}</li>
             </ul>
         </div>
     </c:if>
@@ -169,20 +169,20 @@
                 <li><b class="propertyname">Name:</b> ${template.name}</li>
                 <li><b class="propertyname">Category:</b> ${requestScope.category}</li>
                 <li><b class="propertyname">Images:</b> 
-                    <img style="width:100px; display: inline-block;" class="img-responsive" src="../images/avatar.png" alt=""/>
-                    <img style="width:100px; display: inline-block;" class="img-responsive" src="../images/product2-3.jpg" alt=""/>
-                    <img style="width:100px; display: inline-block;" class="img-responsive" src="../images/product2-2.jpg" alt=""/>
+                    <c:forEach var="image" items="${requestScope.imgList}">
+                        <img style="width:100px; display: inline-block;" class="img-responsive" src="${pageContext.request.contextPath}/uploads/${image.path}" alt=""/>
+                    </c:forEach>
                 </li>
                 <li><b class="propertyname">Description:</b> ${template.description}</li>
                 <li><b class="propertyname">Live Demo:</b> ${template.hostUrl}</li>
                 <li><b class="propertyname">Price:</b> ${template.price}$</li>
-                <li><b class="propertyname">Source Code:</b> ...</li>
                 <li><b class="propertyname">Create Date:</b> ${template.createdDate}</li>
                 <li><b class="propertyname">Last Modified Date:</b> ${template.lastModifiedDate}</li>
                 <li><b class="propertyname">Sold Quantity:</b> ${template.soldQuantity}</li>
             </ul>
-            <form>
-                <input type="hidden" name="temId" value="01">
+            <form action="${pageContext.request.contextPath}/Admin/deleteTemplate">
+                <input type="hidden" name="pageNo" value="${param.pageNo}">
+                <input type="hidden" name="temId" value="${template.id}">
                 <input type="submit" value="Delete this Template">
             </form>
 

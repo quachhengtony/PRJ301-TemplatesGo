@@ -54,7 +54,7 @@
 		</div>
 	</div>
   
-        <div class="col-md-8 col-md-offset-2" >
+        <div class="col-md-12" >
 			<div >
 				<table id="edd_checkout_cart" class="ajaxed">
 				<thead>
@@ -98,7 +98,7 @@
                                         </c:if>
                                         <c:if test="${user.banStatus == false}">
                                             <form action="${pageContext.request.contextPath}/Admin/banUser" method="POST">
-                                                Input days: <input style="width: 50px;" type="number" name="numberBanDate" required="">
+                                                Input days: <input style="width: 50px;" type="number" min="1" name="numberBanDate" required="">
                                                 <input type="hidden" name="userId" value="${user.id}">
                                                 <input type="hidden" name="pageNo" value="${param.pageNo}">
                                                 <input type="submit" value="Ban">
@@ -130,14 +130,16 @@
                     </ul> 
                 </nav>
                         <c:if test="${not empty requestScope.user}">
-		<div class="edd_clearfix properties-box " style="margin-bottom: 20px;">
+		<div class="edd_clearfix properties-box col-md-6 col-md-offset-3" style="margin-bottom: 20px;">
                             <h3>User Info</h3>
 				<ul class="unstyle">
                                         <li><b class="propertyname">Username:</b> ${user.username}</li>
                                         <li><b class="propertyname">First Name</b> ${user.firstName}</li>
 					<li><b class="propertyname">Last Name</b> ${user.lastName}</li>
 					<li><b class="propertyname">Email</b> ${user.email}</li>
-					<li><b class="propertyname">Avatar</b> <img style="width:25px; display: inline-block;" class="img-circle img-responsive" src="../images/avatar.png" alt=""/></li>
+					<li><b class="propertyname">Avatar</b> 
+                                            <img style="width:50px; display: inline-block;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>
+                                        </li>
 					<li><b class="propertyname">Role:</b> ${user.role}</li>
 					<li><b class="propertyname">Create Date:</b> ${user.createDate}</li>
 					<li><b class="propertyname">Ban Status</b> ${user.banStatus}</li>

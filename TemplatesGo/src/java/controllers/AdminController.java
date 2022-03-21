@@ -5,10 +5,14 @@
  */
 package controllers;
 
+import static controllers.SellerController.SAVE_DIRECTORY;
+import dbmanager.CartManager;
 import dbmanager.CategoryManager;
 import dbmanager.ReportManager;
+import dbmanager.TemplateImageManager;
 import dbmanager.TemplateManager;
 import dbmanager.UserManager;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -23,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import models.Category;
 import models.Report;
 import models.Template;
+import models.TemplateImage;
 import models.User;
 
 /**
@@ -47,6 +52,7 @@ public class AdminController extends HttpServlet {
         ReportManager reportManager = new ReportManager();
         TemplateManager templateManager = new TemplateManager();
         CategoryManager categoryManager = new CategoryManager();
+        TemplateImageManager templateImageManager = new TemplateImageManager();
 
         if ("/userList".equals(path)) {
             HttpSession httpSession = request.getSession();
@@ -97,7 +103,7 @@ public class AdminController extends HttpServlet {
             updateUser.setBanStatus(true);
             updateUser.setUnbanDate(new Date(System.currentTimeMillis() + numberBanDate * 24 * 60 * 60 * 1000));
 
-            userManager.updateUser(updateUser);
+            userManager.updateBanUser(updateUser);
 
             response.sendRedirect(request.getContextPath() + "/Admin/userList?pageNo=" + pageNo);
         } else if ("/reportList".equals(path)) {
@@ -155,7 +161,8 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("template", template);
                 String cateName = categoryManager.getCategory(template.getCategoryId()).getCategory();
                 request.setAttribute("category", cateName);
-
+                ArrayList<TemplateImage> imgList = templateImageManager.getImageList(templateId);
+                request.setAttribute("imgList", imgList);
             }
 
             request.setAttribute("size", size);
@@ -199,6 +206,41 @@ public class AdminController extends HttpServlet {
                 categoryManager.insertCategory(newCate);
                 response.sendRedirect(request.getContextPath() + "/Admin/categoryManager");
             }
+        } else if ("/deleteTemplate".equals(path)) {
+            int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+            int tempId = Integer.parseInt(request.getParameter("temId"));
+            
+            Template template = templateManager.getTemplateById(tempId);
+            //delete  images
+            String appPath = request.getServletContext().getRealPath("");
+            appPath = appPath.replace('\\', '/');
+
+            String fullSavePath = null;
+            if (appPath.endsWith("/")) {
+                fullSavePath = appPath + SAVE_DIRECTORY;
+            } else {
+                fullSavePath = appPath + "/" + SAVE_DIRECTORY;
+            }
+            
+            ArrayList<TemplateImage> imgList = templateImageManager.getImageList(tempId);
+            templateImageManager.deleteTemplateImage(tempId);
+            for (TemplateImage img : imgList) {
+                File imgFile = new File(fullSavePath + "/" + img.getPath());
+                imgFile.delete();
+            }
+            //delete report
+            reportManager.deleteByTemplate(tempId);
+            //delete source code
+            new File(fullSavePath + "/"  + template.getSourceCodePath()).delete();
+            //delete cart
+            CartManager cartManager = new CartManager();
+            cartManager.deleteCartByTemplate(tempId);
+
+            templateManager.deleteTemplateById(tempId);
+            
+            
+            response.sendRedirect(request.getContextPath() + "/Admin/reportList?pageNo=" + pageNo);
+
         }
 
     }
