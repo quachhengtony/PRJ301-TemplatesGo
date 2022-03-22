@@ -3,6 +3,8 @@
     Created on : Feb 22, 2022, 8:55:50 PM
     Author     : Thanh
 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List,models.User" %>
 <c:set var="user" value="${sessionScope.userSession}"/>
@@ -68,26 +70,25 @@
                                         <th class="edd_cart_item_price">
                                             Item Price
                                         </th>
-                                        <th class="edd_cart_actions">
-                                            Actions
-                                        </th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
-                                        <td class="edd_cart_item_name">
-                                            <div class="edd_cart_item_image">
-                                                <img width="25" height="25" src="../images/scorilo2-70x70.jpg" alt="">
-                                            </div>
-                                            <span class="edd_checkout_cart_item_title">Audio Item - Single License</span>
-                                        </td>
-                                        <td class="edd_cart_item_price">
-                                            $11.99
-                                        </td>
-                                        <td class="edd_cart_actions">
-                                            <a class="edd_cart_remove_item_btn" href="${pageContext.request.contextPath}/Cart/remove?templateId=${item.id}">Remove</a>
-                                        </td>
-                                    </tr>
+                                    <c:set var="total" value="0"/>
+                                    <c:forEach var="item" items="${requestScope.templateList}">
+                                        <tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
+
+                                            <td value="${item.id}">
+                                                ${item.name}
+                                            </td>
+                                            <td class="edd_cart_item_price">
+                                                $${item.price}
+                                            </td>
+                                            
+                                        </tr>
+                                        <c:set var="total" value="${total + item.price}"/>
+                                    </c:forEach>
+
                                 </tbody>
                                 <tfoot>
 
@@ -97,7 +98,9 @@
                                     </tr>
                                     <tr class="edd_cart_footer_row">
                                         <th colspan="5" class="edd_cart_total">
-                                            Total: <span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">$11.99</span>
+                                            Total: <span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">
+                                                $<fmt:formatNumber value="${total}" minFractionDigits="2" maxFractionDigits="2"/>
+                                            </span>
                                         </th>
                                     </tr>
                                 </tfoot>

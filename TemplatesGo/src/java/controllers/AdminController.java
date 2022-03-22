@@ -8,6 +8,7 @@ package controllers;
 import static controllers.SellerController.SAVE_DIRECTORY;
 import dbmanager.CartManager;
 import dbmanager.CategoryManager;
+import dbmanager.OrderManager;
 import dbmanager.ReportManager;
 import dbmanager.TemplateImageManager;
 import dbmanager.TemplateManager;
@@ -235,6 +236,8 @@ public class AdminController extends HttpServlet {
             //delete cart
             CartManager cartManager = new CartManager();
             cartManager.deleteCartByTemplate(tempId);
+            //delete order
+            new OrderManager().deleteOrderByTemplate(tempId);
 
             templateManager.deleteTemplateById(tempId);
             

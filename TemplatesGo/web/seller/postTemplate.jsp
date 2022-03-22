@@ -71,7 +71,7 @@
                                         Category: <span class="edd-required-indicator">*</span>
                                     </label>
                                     <select name="category">
-                                        <c:forEach var="o" items="${lis}">
+                                        <c:forEach var="o" items="${requestScope.categoryList}">
                                         <option value="${o.id}">${o.category}</option>
                                         </c:forEach>
                                     </select>
@@ -91,7 +91,7 @@
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
                                         Price: <span class="edd-required-indicator">*</span></label>
-                                    <input class="edd-input" type="number" min="0" max="100" step=".1" name="price" id="edd-last" value="" required>
+                                    <input class="edd-input" type="number" min="0" max="100" step=".01" name="price" id="edd-last" value="" required>
                                 </p>
                                 <p id="edd-last-name-wrap">
                                     <label class="edd-label" for="edd-last">
