@@ -26,6 +26,7 @@ import models.Report;
 import models.Template;
 import models.User;
 import models.Category;
+
 /**
  *
  * @author Tony Quach
@@ -52,18 +53,12 @@ public class TemplateController extends HttpServlet {
         String path = request.getPathInfo();
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        
-       if (path.equals("/listingCate")) {
-            TemplateManager temp = new TemplateManager();
-            List<Category> a = temp.getCategory();
-            request.setAttribute("cate", a);
-            request.getRequestDispatcher("/seller/postTemplate.jsp").forward(request, response);
-        }else if (path.equals("/listing")) {
+        if (path.equals("/listing")) {
             try {
-             TemplateManager temp = new TemplateManager();
-            List<Category> a = temp.getCategory();
-            request.setAttribute("cate", a);
-    
+                TemplateManager temp = new TemplateManager();
+                List<Category> a = temp.getCategory();
+                request.setAttribute("cate", a);
+
                 int page = 1;
                 int recordsPerPage = 6;
                 if (request.getParameter("page") != null) {
@@ -128,7 +123,7 @@ public class TemplateController extends HttpServlet {
                     String imgPath = imageManager.getImageList(template.getId()).get(0).getPath();
                     thumbnails.put(template.getId(), imgPath);
                 }
-                
+
                 request.setAttribute("thumbnails", thumbnails);
                 request.setAttribute("templates", templates);
                 request.setAttribute("numberOfPages", numberOfPages);
@@ -147,7 +142,7 @@ public class TemplateController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Template/listing");
                 return;
             }
-            
+
             List<Category> categoryList = new TemplateManager().getCategory();
             request.setAttribute("categoryList", categoryList);
 

@@ -5,6 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="revenue" value="${0}"/>
 <c:forEach var="template" items="${requestScope.templates}">
     <c:set var="revenue" value="${revenue + template.price}" />
@@ -68,7 +69,7 @@
                                         Template
                                     </th>
                                     <th class="edd_cart_item_price">
-                                        Price ($${revenue})
+                                        Price ($<fmt:formatNumber value="${revenue}" minFractionDigits="2" maxFractionDigits="2"/>)
                                     </th>
                                     <th class="edd_cart_actions">
                                         Buyer's Username

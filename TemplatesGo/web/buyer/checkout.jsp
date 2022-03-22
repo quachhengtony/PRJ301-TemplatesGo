@@ -3,8 +3,8 @@
     Created on : Feb 22, 2022, 8:55:50 PM
     Author     : Thanh
 --%>
+<%@page import="models.Template"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List,models.User" %>
 <c:set var="user" value="${sessionScope.userSession}"/>
@@ -70,7 +70,7 @@
                                         <th class="edd_cart_item_price">
                                             Item Price
                                         </th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,7 +84,7 @@
                                             <td class="edd_cart_item_price">
                                                 $${item.price}
                                             </td>
-                                            
+
                                         </tr>
                                         <c:set var="total" value="${total + item.price}"/>
                                     </c:forEach>
@@ -108,7 +108,7 @@
                         </div>
                     </form>
                     <div id="edd_checkout_form_wrap" class="edd_clearfix">
-                        <form id="edd_purchase_form" class="edd_form" action="./InsertHis" method="POST">
+                        <form id="edd_purchase_form" class="edd_form" action="./add" method="POST">
                             <fieldset id="edd_checkout_user_info">
                                 <legend>Personal Info</legend>
                                 <p id="edd-email-wrap">
@@ -151,9 +151,9 @@
                             <fieldset id="edd_purchase_submit">
                                 <p id="edd_final_total_wrap">
                                     <strong>Purchase Total:</strong>
-                                    <span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">$11.99</span>
+                                    <span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">$<fmt:formatNumber value="${total}" minFractionDigits="2" maxFractionDigits="2"/></span>
                                 </p>
-                                <a class="edd-submit button" href="${pageContext.request.contextPath}/Order/InsertHis">Purchase</a>
+                                <a href="${pageContext.request.contextPath}/Order/add" class="edd-submit button">Purchase</a>
                             </fieldset>
                         </form>
                     </div>

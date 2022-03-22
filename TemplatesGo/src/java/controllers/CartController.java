@@ -59,7 +59,7 @@ public class CartController extends HttpServlet {
                     if (!cartManager.checkCartItem(buyerId, Integer.parseInt(templateId))) {
                         boolean isSuccessful = cartManager.insertCartItem(buyerId, Integer.parseInt(templateId));
                     }
-                    
+
                 }
                 request.getRequestDispatcher("/Cart/cart").forward(request, response);
             } catch (Exception e) {
@@ -125,8 +125,7 @@ public class CartController extends HttpServlet {
             } catch (Exception e) {
 
             }
-        } //purchase
-        else if (path.equals("/purchase")) {
+        } else if (path.equals("/purchase")) {
             try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
@@ -134,9 +133,8 @@ public class CartController extends HttpServlet {
 
                 CartManager manager = new CartManager();
                 boolean cart = manager.deleteCart(buyerId);
-
-                request.setAttribute("purchase", cart);
-                response.sendRedirect(request.getContextPath() + "/User/login");
+          
+                response.sendRedirect(request.getContextPath() + "/User/buyHistory");
             } catch (Exception e) {
 
             }

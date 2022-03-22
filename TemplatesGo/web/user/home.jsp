@@ -5,6 +5,7 @@
 --%>
 <%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List,models.Template" %>
+<c:set var="user" value="${sessionScope.userSession}"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,7 +29,7 @@
         <header class="item header margin-top-0">
             <div class="wrapper">
                 <%@include file="../layout/navBar.jsp" %>
-                 <c:set var="list" value="${requestScope.cate}"/> 
+                <c:set var="list" value="${requestScope.cate}"/> 
                 <!-- CATEGORY ====================-->
                 <ul class="nav nav-pills nav-fill" id='category'>
                     <c:forEach var="o" items="${list}"> 
@@ -64,7 +65,7 @@
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit" id="addressSearch">
                                 <span>  <i class="fa fa-search"></i> Search</span>
-                        </button>
+                            </button>
                         </span>
                     </div>
                 </div>
@@ -118,11 +119,22 @@
                                             ${template.description}
                                         </p>
                                         <p>
-                                            <a href="#" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                            <c:choose>
+                                                <c:when test="${user == null}">
+                                                    <a href="${pageContext.request.contextPath}/User/login" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                                </c:when>
+                                                <c:when test="${user.role == 'seller'}">
+                                                    <a class="learn-more detailslearn" disabled><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${pageContext.request.contextPath}/Cart/add?templateId=${template.id}" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                             <a href="${pageContext.request.contextPath}/Template/detail?id=${template.id}" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
                                         </p>
                                     </div>
-                                            <span class="maxproduct"><img style="height: 300px" src="${pageContext.request.contextPath}/uploads/${requestScope.thumbnails[template.id]}" alt=""></span>
+                                    <span class="maxproduct"><img style="height: 300px" src="${pageContext.request.contextPath}/uploads/${requestScope.thumbnails[template.id]}" alt=""></span>
                                 </div>
                                 <div class="product-details">
                                     <a href="#">
