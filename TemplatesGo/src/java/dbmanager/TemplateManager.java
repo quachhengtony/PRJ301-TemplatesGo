@@ -14,6 +14,7 @@ import models.Report;
 import models.Template;
 import utils.DBUtils;
 import models.Category;
+
 /**
  *
  * @author Tony Quach
@@ -201,18 +202,18 @@ public class TemplateManager {
         return null;
     }
 
-     public List<Category> getCategory() {
+    public List<Category> getCategory() {
         String sql = "SELECT * FROM dbo.Category ";
-       List<Category> list= new ArrayList<>();
+        List<Category> list = new ArrayList<>();
         try {
             Connection connection = DBUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(new Category(Integer.parseInt(resultSet.getString("id")), resultSet.getString("category")));
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -472,11 +473,6 @@ public class TemplateManager {
             System.out.println(e);
         }
         return null;
-        
-        
-        
-        
-        
     }
 
     public boolean createReport(Report report) {

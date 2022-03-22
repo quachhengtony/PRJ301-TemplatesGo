@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import models.Template;
 import models.User;
 import utils.DBUtils;
 
@@ -117,7 +118,7 @@ public class UserManager {
         }
         return null;
     }
-    
+
     public User getUser(int userId) {
         User user = null;
         try {
@@ -126,16 +127,16 @@ public class UserManager {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                user = new User(rs.getInt("id"), 
-                        rs.getString("username"), 
-                        rs.getString("firstName"), 
-                        rs.getString("lastName"), 
-                        rs.getString("email"), 
-                        rs.getString("password"), 
-                        rs.getString("avatar"), 
-                        rs.getString("role"), 
-                        rs.getDate("createDate"), 
-                        rs.getBoolean("banStatus"), 
+                user = new User(rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("avatar"),
+                        rs.getString("role"),
+                        rs.getDate("createDate"),
+                        rs.getBoolean("banStatus"),
                         rs.getDate("unbanDate"));
             }
         } catch (Exception e) {
@@ -161,7 +162,7 @@ public class UserManager {
         }
         return true;
     }
-    
+
     public boolean updateBanUser(User newUser) {
         try {
             Connection con = DBUtils.getConnection();
@@ -176,7 +177,7 @@ public class UserManager {
         }
         return true;
     }
-    
+
     public void unbanUser(int userId) {
         try {
             Connection con = DBUtils.getConnection();
@@ -189,7 +190,7 @@ public class UserManager {
 
         }
     }
-    
+
     public int getSellerIdFromReport(int reportId) {
         String sql = "select t1.id from [dbo].[User] t1\n"
                 + "join Template t2 on  t1.id = t2.sellerId\n"
@@ -209,7 +210,7 @@ public class UserManager {
         }
         return -1;
     }
-    
+
     public int getReporterIdFromReport(int reportId) {
         String sql = "select t1.id from [dbo].[User] t1\n"
                 + "join Report t2 on t1.id = t2.reporterId\n"
@@ -228,7 +229,7 @@ public class UserManager {
         }
         return -1;
     }
-    
+
     public String getSellerNameFromReport(int reportId) {
         String sql = "select t1.username from [dbo].[User] t1\n"
                 + "join Template t2 on  t1.id = t2.sellerId\n"
@@ -248,7 +249,7 @@ public class UserManager {
         }
         return "";
     }
-    
+
     public String getReporterNameFromReport(int reportId) {
         String sql = "select t1.username from [dbo].[User] t1\n"
                 + "join Report t2 on t1.id = t2.reporterId\n"
@@ -284,4 +285,57 @@ public class UserManager {
 
     }
 
+    public List<Template> getBuyHistory(int buyerId) {
+        String sql = "SELECT * FROM OrderHistory JOIN Template ON OrderHistory.templateId = Template.id WHERE OrderHistory.buyerId = ?";
+        try {
+            Connection connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, buyerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Template> templates = new ArrayList<>();
+            while (resultSet.next()) {
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+            }
+            return templates;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public List<Template> getSellHistory(int sellerId) {
+        String sql = "SELECT * FROM (OrderHistory JOIN Template ON OrderHistory.templateId = Template.id) JOIN [User] ON OrderHistory.buyerId = [User].id WHERE OrderHistory.sellerId = ?";
+        try {
+            Connection connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, sellerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Template> templates = new ArrayList<>();
+            while (resultSet.next()) {
+                templates.add(new Template(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("sellerId")), Integer.parseInt(resultSet.getString("categoryId")), resultSet.getString("name"), resultSet.getString("description"), Float.parseFloat(resultSet.getString("price")), resultSet.getString("hostUrl"), resultSet.getString("sourceCodePath"), resultSet.getDate("createdDate"), resultSet.getDate("lastModifiedDate"), Integer.parseInt(resultSet.getString("soldQuantity"))));
+            }
+            return templates;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public List<User> getSellHistoryBuyers(int sellerId) {
+        String sql = "SELECT * FROM (OrderHistory JOIN Template ON OrderHistory.templateId = Template.id) JOIN [User] ON OrderHistory.buyerId = [User].id WHERE OrderHistory.sellerId = ?";
+        try {
+            Connection connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, sellerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> buyers = new ArrayList<>();
+            while (resultSet.next()) {
+                buyers.add(new User(resultSet.getString("username"), resultSet.getString("email")));
+            }
+            return buyers;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }

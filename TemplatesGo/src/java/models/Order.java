@@ -18,8 +18,7 @@ public class Order {
     private int buyerId;
     private Date date;
 
-    public Order() {
-    }
+    public Order() {}
 
     public Order(int templateId, int sellerId, int buyerId, Date date) {
         this.templateId = templateId;
@@ -28,8 +27,6 @@ public class Order {
         this.date = date;
     }
 
-  
-    
     public int getTemplateId() {
         return templateId;
     }
@@ -61,8 +58,4 @@ public class Order {
     public void setDate(Date date) {
         this.date = date;
     }
-
-
-   
 }
-
