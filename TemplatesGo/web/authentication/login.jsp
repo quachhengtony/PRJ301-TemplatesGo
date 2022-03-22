@@ -65,6 +65,7 @@
                             <div class="form">
                                 <input type="text" name="email" placeholder="Your E-mail Address *" required>
                                 <input type="password" name="password" placeholder="Your Password *" minlength="8" required>
+                                <p>${requestScope.loginErrorMsg}</p>
                                 <input type="submit" id="submit" class="clearfix btn" value="Login">
                             </div>
                         </form>

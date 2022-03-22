@@ -5,11 +5,14 @@
  */
 package controllers;
 
+import dbmanager.CategoryManager;
+import dbmanager.TemplateImageManager;
 import dbmanager.TemplateManager;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -118,7 +121,15 @@ public class TemplateController extends HttpServlet {
                             break;
                     }
                 }
-
+                //get thumbnails
+                TemplateImageManager imageManager = new TemplateImageManager();
+                HashMap<Integer, String> thumbnails = new HashMap<>();
+                for (Template template : templates) {
+                    String imgPath = imageManager.getImageList(template.getId()).get(0).getPath();
+                    thumbnails.put(template.getId(), imgPath);
+                }
+                
+                request.setAttribute("thumbnails", thumbnails);
                 request.setAttribute("templates", templates);
                 request.setAttribute("numberOfPages", numberOfPages);
                 request.setAttribute("currentPage", page);
@@ -136,6 +147,9 @@ public class TemplateController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Template/listing");
                 return;
             }
+            
+            List<Category> categoryList = new TemplateManager().getCategory();
+            request.setAttribute("categoryList", categoryList);
 
             request.getRequestDispatcher("/seller/postTemplate.jsp").forward(request, response);
         }
@@ -183,7 +197,7 @@ public class TemplateController extends HttpServlet {
                             part.write(filePath);
 
                             if (user != null) {
-                                Template template = new Template(user.getId(), 1, name.trim(), description.trim(), Float.parseFloat(price), hostURL.trim(), fileName, date, date, 0);
+                                Template template = new Template(user.getId(), Integer.parseInt(category), name.trim(), description.trim(), Float.parseFloat(price), hostURL.trim(), fileName, date, date, 0);
                                 createdTemplateId = templateManager.postTemplateAndReturnId(template);
                                 System.out.println("ID RETURNED: " + createdTemplateId);
                             }
@@ -212,9 +226,11 @@ public class TemplateController extends HttpServlet {
                 if (id != null) {
                     TemplateManager templateManager = new TemplateManager();
                     Template template = templateManager.getTemplateById(Integer.parseInt(id));
+                    String category = new CategoryManager().getCategory(template.getCategoryId()).getCategory();
                     List<String> images = templateManager.getTemplateImages(Integer.parseInt(id));
                     String seller = templateManager.getTemplateSeller(template.getSellerId());
                     request.setAttribute("template", template);
+                    request.setAttribute("category", category);
                     request.setAttribute("images", images);
                     request.setAttribute("seller", seller);
                 }

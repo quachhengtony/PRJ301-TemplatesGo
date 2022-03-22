@@ -80,10 +80,10 @@
                         </c:if>
                         <form method="POST" action="./register" id="contactform">
                             <div class="form">
-                                <input type="text" name="username" placeholder="Your Username *" required>
-                                <input type="text" name="firstName" placeholder="Your First Name *" required>
-                                <input type="text" name="lastName" placeholder="Your Last Name *" required>
-                                <input type="email" name="email" placeholder="Your E-mail Address *" required>
+                                <input type="text" name="username" placeholder="Your Username *" value="${param.username}" required>
+                                <input type="text" name="firstName" placeholder="Your First Name *" value="${param.firstName}" required>
+                                <input type="text" name="lastName" placeholder="Your Last Name *" value="${param.lastName}" required>
+                                <input type="email" name="email" placeholder="Your E-mail Address *" value="${param.email}" required>
                                 <input type="password" name="password" placeholder="Your Password *" minlength="8" required>
                                 <input type="password" name="confirmPassword" placeholder="Confirm Password *" minlength="8" required>
                                 <label for="role">Register as a:</label>

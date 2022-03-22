@@ -7,6 +7,7 @@ package controllers;
 
 import dbmanager.CartManager;
 import dbmanager.CategoryManager;
+import dbmanager.OrderManager;
 import dbmanager.ReportManager;
 import dbmanager.TemplateImageManager;
 import dbmanager.TemplateManager;
@@ -268,7 +269,8 @@ public class SellerController extends HttpServlet {
             //delete cart
             CartManager cartManager = new CartManager();
             cartManager.deleteCartByTemplate(templateId);
-
+            //delete order history
+            new OrderManager().deleteOrderByTemplate(templateId);
             tempManager.deleteTemplateById(templateId);
 
             response.sendRedirect(request.getContextPath() + "/Seller/dashboard?pageNo=" + pageNo);
