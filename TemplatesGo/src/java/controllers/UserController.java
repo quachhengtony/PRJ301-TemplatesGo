@@ -5,11 +5,14 @@
  */
 package controllers;
 
+import dbmanager.OrderManager;
+import dbmanager.TemplateManager;
 import dbmanager.UserManager;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import models.Template;
 import models.User;
 
 /**
@@ -198,6 +202,52 @@ public class UserController extends HttpServlet {
                 }
             } catch (Exception e) {
                 System.out.println("\n>>> " + e);
+            }
+        }
+
+        if (path.equals("/buyHistory")) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("buyer")) {
+                response.sendRedirect(request.getContextPath() + "/User/login");
+                return;
+            }
+
+            try {
+                UserManager userManager = new UserManager();
+                List<Template> templates = userManager.getBuyHistory(userSession.getId());
+                if (templates != null) {
+                    request.setAttribute("templates", templates);
+                    request.getRequestDispatcher("/user/buyHistory.jsp").forward(request, response);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        if (path.equals("/sellHistory")) {
+            HttpSession httpSession = request.getSession();
+            User userSession = (User) httpSession.getAttribute("userSession");
+
+            if (userSession == null || !userSession.getRole().equals("seller")) {
+                response.sendRedirect(request.getContextPath() + "/User/login");
+                return;
+            }
+
+            try {
+                UserManager userManager = new UserManager();
+                List<Template> templates = userManager.getSellHistory(userSession.getId());
+                if (templates != null) {
+                    List<User> buyers = userManager.getSellHistoryBuyers(userSession.getId());
+                    if (buyers != null) {
+                        request.setAttribute("templates", templates);
+                        request.setAttribute("buyers", buyers);
+                        request.getRequestDispatcher("/user/sellHistory.jsp").forward(request, response);
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }

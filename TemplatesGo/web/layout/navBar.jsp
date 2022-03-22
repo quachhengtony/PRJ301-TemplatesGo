@@ -49,6 +49,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
+                            <li><a href="${pageContext.request.contextPath}/User/buyHistory">Buy History</a></li>
                             <li><a href="${pageContext.request.contextPath}/User/logout">Log out</a></li>
                         </ul>
                     </li>
@@ -78,6 +79,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/User/account">Account</a></li>
+                            <li><a href="${pageContext.request.contextPath}/User/sellHistory">Sell History</a></li>
                             <li><a href="${pageContext.request.contextPath}/User/logout">Log out</a></li>
                         </ul>
                     </li>

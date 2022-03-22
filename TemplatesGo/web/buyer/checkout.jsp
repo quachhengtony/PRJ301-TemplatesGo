@@ -151,13 +151,12 @@
                                     <span class="edd_cart_amount" data-subtotal="11.99" data-total="11.99">$11.99</span>
                                 </p>
                                 <a class="edd-submit button" href="${pageContext.request.contextPath}/Order/InsertHis">Purchase</a>
-
-				</fieldset>
-			</form>
-		</div>
-	</div>
-</div>
-</section>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
         <%@include file="../layout/footer.jsp" %>
