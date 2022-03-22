@@ -42,7 +42,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="propClone"><a href="${pageContext.request.contextPath}/Template/listing">Home</a></li>
                     <li class="propClone"><a href="${pageContext.request.contextPath}/Cart/cart">Cart</a></li>
-                    <li class="propClone"><a href="${pageContext.request.contextPath}/buyer/checkout.jsp">Checkout</a></li>
+                    <li class="propClone"><a href="${pageContext.request.contextPath}/Cart/checkout">Checkout</a></li>
                     <li class="propClone dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img style="width: 25px;" class="img-circle img-responsive" src="${pageContext.request.contextPath}/avatars/${user.avatar}" alt=""/>

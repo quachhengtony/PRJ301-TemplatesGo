@@ -31,17 +31,13 @@
                  <c:set var="list" value="${requestScope.cate}"/> 
                 <!-- CATEGORY ====================-->
                 <ul class="nav nav-pills nav-fill" id='category'>
-                   
-                            <li class="nav-item">
-                                <c:forEach var="o" items="${list}"> 
-                                    
-                        <a class="nav-link" href="./listing?category=${o.id}">${o.category}</a>
-                         </c:forEach>
-                    </li> 
-                    
-                   
-                   
-                                    </ul>
+                    <c:forEach var="o" items="${list}"> 
+                        <li class="nav-item ${param.category == o.id ? 'active' : ''}">
+                            <a class="nav-link " href="./listing?category=${o.id}">${o.category}</a>
+                        </li> 
+                    </c:forEach>
+
+                </ul>
 
                 <div class="container">
                     <div class="row">
@@ -126,7 +122,7 @@
                                             <a href="${pageContext.request.contextPath}/Template/detail?id=${template.id}" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
                                         </p>
                                     </div>
-                                    <span class="maxproduct"><img src="${pageContext.request.contextPath}/images/product1-1.jpg" alt=""></span>
+                                            <span class="maxproduct"><img style="height: 300px" src="${pageContext.request.contextPath}/uploads/${requestScope.thumbnails[template.id]}" alt=""></span>
                                 </div>
                                 <div class="product-details">
                                     <a href="#">

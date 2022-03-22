@@ -56,12 +56,12 @@ public class CartController extends HttpServlet {
 
                 if (buyerId != null && templateId != null) {
                     CartManager cartManager = new CartManager();
-                    boolean isSuccessful = cartManager.insertCartItem(buyerId, Integer.parseInt(templateId));
-                    if (isSuccessful) {
-
+                    if (!cartManager.checkCartItem(buyerId, Integer.parseInt(templateId))) {
+                        boolean isSuccessful = cartManager.insertCartItem(buyerId, Integer.parseInt(templateId));
                     }
+                    
                 }
-                request.getRequestDispatcher("/buyer/cart.jsp").forward(request, response);
+                request.getRequestDispatcher("/Cart/cart").forward(request, response);
             } catch (Exception e) {
 
             }
@@ -98,7 +98,7 @@ public class CartController extends HttpServlet {
                 boolean remove = manager.deleteCartItem(buyerId, templateId);
 
                 request.setAttribute("temp-remove", remove);
-                request.getRequestDispatcher("/buyer/cart.jsp").forward(request, response);
+                request.getRequestDispatcher("/Cart/cart").forward(request, response);
             } catch (Exception e) {
 
             }
@@ -106,10 +106,13 @@ public class CartController extends HttpServlet {
             try {
                 HttpSession httpSession = request.getSession();
                 User userSession = (User) httpSession.getAttribute("userSession");
-                Integer buyerId = userSession.getId();
 
-                CartManager manager = new CartManager();
-                Cart cart = manager.getCart(buyerId);
+                if (userSession == null || !userSession.getRole().equals("buyer")) {
+                    response.sendRedirect(request.getContextPath() + "/User/login");
+                }
+                CartManager cartManager = new CartManager();
+
+                Cart cart = cartManager.getCart(userSession.getId());
                 ArrayList<Template> templateList = new ArrayList();
 
                 for (int id : cart.getTemplateList()) {

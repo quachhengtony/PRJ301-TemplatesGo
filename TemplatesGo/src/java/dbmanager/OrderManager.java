@@ -68,4 +68,14 @@ public class OrderManager {
         }
         return orders;
     }
+    
+    public void deleteOrderByTemplate(int templateId) {
+        try {
+            String sql = "delete from OrderHistory where templateId = ?";
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.execute();
+        } catch (Exception e) {
+        }
+    }
 }
