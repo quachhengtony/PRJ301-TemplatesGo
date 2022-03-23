@@ -91,6 +91,22 @@ The images bellow show how the system is implemented using the MVC model.
 | Models | ![TemplatesGo Models](/assets/screenshots/TemplatesGo_Models.png) |
 | Views | ![TemplatesGo Views](/assets/screenshots/TemplatesGo_Views.png) |
 
+## Conclusion
+##### Pros
+- Simple and straight-forward buying and selling experience.
+- Truthful adaptation of the MVC pattern.
+##### Cons
+- Missing important features such as: forget password, notification, email verification, etc.
+- Messy codebase.
+##### What we've learned
+- MVC pattern.
+- File upload.
+- Database paging.
+- Design and implement a full-fledged web application from start to finish.
+##### Possible future improvements
+- Add missing features.
+- Refactor methods and variables names.
+- Improve database design.
 
 ## License
 MIT
